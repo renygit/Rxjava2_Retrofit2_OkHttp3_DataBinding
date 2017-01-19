@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewHolder"
+            type="cn.bingoogolapple.androidcommon.adapter.BGABindingViewHolder" />
+
+        <variable
+            name="model"
+            type="com.dsc.databindingdemo.model.GankData.ResultsBean" />
+
+        <variable
+            name="itemEventHandler"
+            type="com.dsc.databindingdemo.presenter.HomePresenter" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:descendantFocusability="blocksDescendants"
+        android:orientation="vertical"
+        android:padding="5dp"
+        android:clickable="true"
+        app:onNoDoubleClick="@{() -> itemEventHandler.onClickItem(viewHolder, model)}">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{model.type+"--"+model.desc}'/>
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:actualImageScaleType="centerInside"
+            app:frescoImgUrl="@{model.images[0]}"/>
+
+    </LinearLayout>
+</layout>
