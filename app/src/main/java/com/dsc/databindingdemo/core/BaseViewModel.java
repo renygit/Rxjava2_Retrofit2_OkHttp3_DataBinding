@@ -10,11 +10,17 @@ import android.support.v7.widget.RecyclerView;
 
 public class BaseViewModel extends BaseObservable {
 
+    public ObservableBoolean isRefreshing = new ObservableBoolean(true);
     public ObservableBoolean isLoading = new ObservableBoolean(true);
     public ObservableBoolean isEmpty = new ObservableBoolean(false);
     public ObservableBoolean isError = new ObservableBoolean(false);
 
     public RecyclerView.LayoutManager layoutManager = null;
+
+    public void refreshComplete() {
+        isRefreshing.set(true);
+        isRefreshing.set(false);
+    }
 
     public void setState(boolean isLoading, boolean isEmpty, boolean isError) {
         this.isLoading.set(isLoading);
@@ -41,4 +47,5 @@ public class BaseViewModel extends BaseObservable {
     public RecyclerView.LayoutManager getLayoutManager() {
         return layoutManager;
     }
+
 }

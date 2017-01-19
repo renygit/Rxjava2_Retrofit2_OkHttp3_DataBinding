@@ -21,22 +21,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.liaoinstan.springview.widget.SpringView
-            android:id="@+id/springView"
+        <com.github.jdsjlzx.recyclerview.LRecyclerView
+            android:id="@+id/rv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:type="follow"
-            app:headerfooter="@{viewModel}"
+            app:layoutManager="@{viewModel.layoutManager}"
             app:OnFreshListener="@{presenter}"
-            app:isRefreshing="@{viewModel.isRefreshing}">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layoutManager="@{viewModel.layoutManager}"
-                app:adapter="@{viewModel.adapter}"/>
-
-        </com.liaoinstan.springview.widget.SpringView>
+            app:adapter="@{viewModel.adapter}"
+            app:isRefreshing="@{viewModel.isRefreshing}"/>
     </LinearLayout>
 </layout>

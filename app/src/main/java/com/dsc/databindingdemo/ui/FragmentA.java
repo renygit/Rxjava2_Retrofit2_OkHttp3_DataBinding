@@ -8,7 +8,6 @@ import com.dsc.databindingdemo.core.BaseFragment;
 import com.dsc.databindingdemo.databinding.FragmentABinding;
 import com.dsc.databindingdemo.presenter.HomePresenter;
 import com.dsc.databindingdemo.presenter.vm.HomeViewModel;
-import com.liaoinstan.springview.widget.SpringView;
 
 /**
  * Created by reny on 2017/1/9.

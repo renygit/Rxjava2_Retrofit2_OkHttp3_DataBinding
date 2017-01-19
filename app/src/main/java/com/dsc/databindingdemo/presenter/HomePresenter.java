@@ -24,7 +24,7 @@ public class HomePresenter extends BasePresenter<HomeViewModel> {
 
     @Override
     public void onCreatePresenter() {
-        viewModel.adapter.setItemEventHandler(this);
+        viewModel.innerAdapter.setItemEventHandler(this);
         loadData(true);
     }
 
@@ -41,13 +41,13 @@ public class HomePresenter extends BasePresenter<HomeViewModel> {
                     @Override
                     public void onNext(GankData value) {
                         //LogUtils.json(value);
-                        viewModel.setData(isRefresh, value.getResults());
+                        viewModel.setData(isRefresh, value);
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         onFailure(e);
-                        viewModel.finishFreshAndLoad();
+                        viewModel.refreshComplete();
                     }
 
                     @Override
