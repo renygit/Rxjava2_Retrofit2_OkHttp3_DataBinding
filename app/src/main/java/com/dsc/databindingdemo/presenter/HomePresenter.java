@@ -30,7 +30,7 @@ public class HomePresenter extends BasePresenter<HomeViewModel> {
 
     @Override
     public void loadData(final boolean isRefresh) {
-        page = isRefresh ? 1 : ++page;
+        if(isRefresh) page = 1;
 
         BaiduApiService service = (BaiduApiService) ServiceFactory.getInstance().getService(BaiduApiService.class);
 
@@ -41,6 +41,7 @@ public class HomePresenter extends BasePresenter<HomeViewModel> {
                     @Override
                     public void onNext(GankData value) {
                         //LogUtils.json(value);
+                        page++;
                         viewModel.setData(isRefresh, value);
                     }
 

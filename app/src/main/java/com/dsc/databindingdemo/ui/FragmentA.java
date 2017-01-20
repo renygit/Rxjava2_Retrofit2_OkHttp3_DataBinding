@@ -36,16 +36,4 @@ public class FragmentA extends BaseFragment<FragmentABinding, HomeViewModel, Hom
         return HomePresenter.class;
     }
 
-    /*@Override
-    public void setData(boolean isRefresh,List<GankData.ResultsBean> data) {
-        if(isRefresh)mAdapter.setData(data);
-        else mAdapter.addMoreData(data);
-        binding.springView.onFinishFreshAndLoad();
-    }
-
-    @Override
-    public void onFailure(Throwable e) {
-        super.onFailure(e);
-        LogUtils.e("A onFailure:"+e.getMessage());
-    }*/
 }
