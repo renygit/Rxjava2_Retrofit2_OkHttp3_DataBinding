@@ -13,9 +13,9 @@ maven { url "https://jitpack.io" }
 Application初始化时调用InitUtils.init(this, BuildConfig.DEBUG);<br>
   
 Activity继承BaseActivity<ActivityMainBinding, MainViewModel, MainPresenter> 指定3个泛型，分别是默认生成的Binding、继承自库的BaseViewModel,继承自库的BasePresenter;<br>
-会自动实例化三个变量binding，viewModel,presenter，Fragment类似。<br>
+会自动实例化三个变量binding，viewModel，presenter；Fragment类似。<br>
   
-具体使用请看Demo，可以极大减少代码量<br>
+具体使用请看Demo，可以极大减少代码量，欢迎star，以后还会继续完善<br>
 
 
 
