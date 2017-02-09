@@ -13,7 +13,7 @@
 
         <variable
             name="itemEventHandler"
-            type="com.dsc.databindingdemo.presenter.HomePresenter" />
+            type="com.dsc.databindingdemo.presenter.FAPresenter" />
     </data>
 
     <LinearLayout

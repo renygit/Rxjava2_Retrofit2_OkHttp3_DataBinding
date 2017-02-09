@@ -1,4 +1,4 @@
-package com.dsc.databindingdemo.core.http.converter;
+package com.reny.mvpvmlib.http.converter;
 
 public class ResultErrorException extends RuntimeException {
 
@@ -8,6 +8,7 @@ public class ResultErrorException extends RuntimeException {
     public ResultErrorException(int errCode, String msg) {
         super(msg);
         this.errCode = errCode;
+        this.errMsg = msg;
     }
 
     public int getErrCode() {

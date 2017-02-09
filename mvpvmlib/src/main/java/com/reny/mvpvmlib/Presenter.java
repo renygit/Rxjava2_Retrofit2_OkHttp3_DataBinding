@@ -1,4 +1,4 @@
-package com.dsc.databindingdemo.core;
+package com.reny.mvpvmlib;
 
 import io.reactivex.disposables.Disposable;
 

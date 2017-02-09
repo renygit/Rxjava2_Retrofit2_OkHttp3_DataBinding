@@ -4,16 +4,16 @@
 
     <data>
 
-        <import type="com.dsc.databindingdemo.presenter.HomePresenter" />
-        <import type="com.dsc.databindingdemo.presenter.vm.HomeViewModel" />
+        <import type="com.dsc.databindingdemo.presenter.FAPresenter" />
+        <import type="com.dsc.databindingdemo.presenter.vm.FAViewModel" />
 
         <variable
             name="presenter"
-            type="HomePresenter" />
+            type="FAPresenter" />
 
         <variable
             name="viewModel"
-            type="HomeViewModel" />
+            type="FAViewModel" />
     </data>
 
     <LinearLayout

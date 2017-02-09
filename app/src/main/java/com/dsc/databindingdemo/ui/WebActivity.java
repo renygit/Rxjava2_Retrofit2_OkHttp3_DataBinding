@@ -4,10 +4,10 @@ import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.dsc.databindingdemo.R;
-import com.dsc.databindingdemo.core.BaseActivity;
-import com.dsc.databindingdemo.core.BaseViewModel;
-import com.dsc.databindingdemo.core.EmptyPresenter;
 import com.dsc.databindingdemo.databinding.ActivityWebBinding;
+import com.reny.mvpvmlib.BaseActivity;
+import com.reny.mvpvmlib.BaseViewModel;
+import com.reny.mvpvmlib.EmptyPresenter;
 
 public class WebActivity extends BaseActivity<ActivityWebBinding, BaseViewModel, EmptyPresenter> {
 

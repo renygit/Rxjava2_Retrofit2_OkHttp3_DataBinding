@@ -1,4 +1,4 @@
-package com.dsc.databindingdemo.core;
+package com.reny.mvpvmlib;
 
 import android.databinding.BaseObservable;
 import android.databinding.ObservableBoolean;
@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 
 /**
  * Created by reny on 2017/1/4.
+ * 尚未完善界面的一些状态 Loading、Empty、Error 等
  */
 
 public class BaseViewModel extends BaseObservable {

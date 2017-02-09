@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.dsc.databindingdemo.core.http.converter;
+package com.reny.mvpvmlib.http.converter;
 
-import com.dsc.databindingdemo.model.BaseModel;
-import com.dsc.databindingdemo.utils.LogUtils;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
+import com.reny.mvpvmlib.http.HttpBaseModel;
+import com.reny.mvpvmlib.utils.LogUtils;
 
 import java.io.IOException;
 
@@ -29,17 +29,19 @@ import retrofit2.Converter;
 final class GsonResponseBodyConverter<T> implements Converter<ResponseBody, T> {
     private final Gson gson;
     private final TypeAdapter<T> adapter;
+    private final Class<? extends HttpBaseModel> modelClass;
 
-    GsonResponseBodyConverter(Gson gson, TypeAdapter<T> adapter) {
+    GsonResponseBodyConverter(Gson gson, TypeAdapter<T> adapter, Class<? extends HttpBaseModel> modelClass) {
         this.gson = gson;
         this.adapter = adapter;
+        this.modelClass = modelClass;
     }
 
     @Override
     public T convert(ResponseBody value) throws IOException {
         String body = value.string();
         LogUtils.d(body);
-        BaseModel model = gson.fromJson(body, BaseModel.class);
+        HttpBaseModel model = gson.fromJson(body, modelClass);
         try {
             if (!model.isError()) {
                 return adapter.fromJson(body);

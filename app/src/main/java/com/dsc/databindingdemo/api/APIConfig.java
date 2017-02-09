@@ -6,7 +6,6 @@ package com.dsc.databindingdemo.api;
 
 public class APIConfig {
 
-    public static final String BASE_URL_DEFAULT = "http://apis.baidu.com/";
-    public static final String APIKEY = "2c536c1445cd5b5339a67cea1d6c616c";
+    public static final String BASE_URL_DEFAULT = "默认BaseUrl";
 
 }

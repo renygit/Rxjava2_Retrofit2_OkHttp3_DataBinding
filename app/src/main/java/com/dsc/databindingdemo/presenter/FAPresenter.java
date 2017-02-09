@@ -2,12 +2,14 @@ package com.dsc.databindingdemo.presenter;
 
 import android.content.Intent;
 
-import com.dsc.databindingdemo.api.BaiduApiService;
-import com.dsc.databindingdemo.core.BasePresenter;
-import com.dsc.databindingdemo.core.http.ServiceFactory;
+import com.dsc.databindingdemo.api.GankApiService;
+import com.dsc.databindingdemo.core.ServiceFactory;
+import com.dsc.databindingdemo.core.ServiceHelper;
 import com.dsc.databindingdemo.model.GankData;
-import com.dsc.databindingdemo.presenter.vm.HomeViewModel;
+import com.dsc.databindingdemo.presenter.vm.FAViewModel;
 import com.dsc.databindingdemo.ui.WebActivity;
+import com.reny.mvpvmlib.BasePresenter;
+import com.reny.mvpvmlib.utils.LogUtils;
 
 import cn.bingoogolapple.androidcommon.adapter.BGABindingViewHolder;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -18,7 +20,7 @@ import io.reactivex.schedulers.Schedulers;
  * Created by reny on 2017/1/4.
  */
 
-public class HomePresenter extends BasePresenter<HomeViewModel> {
+public class FAPresenter extends BasePresenter<FAViewModel> {
 
     int page = 1;
 
@@ -32,15 +34,13 @@ public class HomePresenter extends BasePresenter<HomeViewModel> {
     public void loadData(final boolean isRefresh) {
         if(isRefresh) page = 1;
 
-        BaiduApiService service = (BaiduApiService) ServiceFactory.getInstance().getService(BaiduApiService.class);
-
-        addDisposable(service.getGankData(page)
+        addDisposable(ServiceHelper.getGankAS().getGankData(page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<GankData>() {
                     @Override
                     public void onNext(GankData value) {
-                        //LogUtils.json(value);
+                        LogUtils.json(value);
                         page++;
                         viewModel.setData(isRefresh, value);
                     }

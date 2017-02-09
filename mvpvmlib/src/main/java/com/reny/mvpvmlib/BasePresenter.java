@@ -1,9 +1,9 @@
-package com.dsc.databindingdemo.core;
+package com.reny.mvpvmlib;
 
 import android.app.Activity;
 import android.content.Context;
 
-import com.dsc.databindingdemo.utils.LogUtils;
+import com.reny.mvpvmlib.utils.LogUtils;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;

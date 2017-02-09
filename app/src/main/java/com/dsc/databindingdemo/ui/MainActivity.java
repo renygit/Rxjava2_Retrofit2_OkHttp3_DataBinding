@@ -10,24 +10,24 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.dsc.databindingdemo.R;
-import com.dsc.databindingdemo.core.BaseActivity;
 import com.dsc.databindingdemo.databinding.ActivityMainBinding;
 import com.dsc.databindingdemo.presenter.MainPresenter;
 import com.dsc.databindingdemo.presenter.vm.MainViewModel;
-import com.dsc.databindingdemo.utils.SwipeBackHelperUtils;
+import com.reny.mvpvmlib.BaseActivity;
+import com.reny.mvpvmlib.utils.SwipeBackUtils;
 import com.shizhefei.view.indicator.IndicatorViewPager;
 import com.shizhefei.view.indicator.transition.OnTransitionTextListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewModel, MainPresenter>{
+public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewModel, MainPresenter> {
 
     private IndicatorViewPager indicatorViewPager;
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        SwipeBackHelperUtils.DisableSwipeActivity(this);
+        SwipeBackUtils.DisableSwipeActivity(this);
 
         binding.tabIndicator.setOnTransitionListener(new OnTransitionTextListener().setColor(Color.RED, Color.GRAY));
         indicatorViewPager = new IndicatorViewPager(binding.tabIndicator, binding.vp);

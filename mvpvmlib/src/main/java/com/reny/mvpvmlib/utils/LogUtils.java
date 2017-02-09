@@ -1,17 +1,14 @@
-package com.dsc.databindingdemo.utils;
+package com.reny.mvpvmlib.utils;
 
-import com.dsc.databindingdemo.BuildConfig;
-import com.dsc.databindingdemo.MyApplication;
 import com.orhanobut.logger.Logger;
 
 
 public class LogUtils {
 
-
     /**
      * 是否写入日志文件
      */
-    public static final boolean isPrint = BuildConfig.DEBUG;
+    public static final boolean isPrint = InitUtils.isPrint;
 
 
     /**
@@ -71,7 +68,8 @@ public class LogUtils {
     }
 
     public final static void json(Object obj){
-        if(isPrint) Logger.json(MyApplication.gson.toJson(obj));
+        if(isPrint)
+            Logger.json(InitUtils.gson.toJson(obj));
     }
 
     public final static void e(Throwable e){

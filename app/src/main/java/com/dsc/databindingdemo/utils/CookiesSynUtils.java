@@ -6,6 +6,7 @@ import android.webkit.CookieSyncManager;
 
 import com.dsc.databindingdemo.MyApplication;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
+import com.reny.mvpvmlib.utils.InitUtils;
 
 import java.util.List;
 
@@ -64,9 +65,9 @@ public class CookiesSynUtils {
             CookieSyncManager.getInstance().sync();
         }
 
-        if(null != MyApplication.cookieJar) {
-            MyApplication.cookieJar.clear();
-            MyApplication.cookieJar.clearSession();
+        if(null != InitUtils.cookieJar) {
+            InitUtils.cookieJar.clear();
+            InitUtils.cookieJar.clearSession();
         }
     }
 }

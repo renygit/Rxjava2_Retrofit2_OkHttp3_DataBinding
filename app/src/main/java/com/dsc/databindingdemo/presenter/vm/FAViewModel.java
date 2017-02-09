@@ -1,10 +1,10 @@
 package com.dsc.databindingdemo.presenter.vm;
 
 import com.dsc.databindingdemo.R;
-import com.dsc.databindingdemo.core.BaseViewModel;
 import com.dsc.databindingdemo.databinding.ItemMainBinding;
 import com.dsc.databindingdemo.model.GankData;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
+import com.reny.mvpvmlib.BaseViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ import cn.bingoogolapple.androidcommon.adapter.BGABindingRecyclerViewAdapter;
  * Created by reny on 2017/1/4.
  */
 
-public class HomeViewModel extends BaseViewModel {
+public class FAViewModel extends BaseViewModel {
 
     public BGABindingRecyclerViewAdapter<GankData.ResultsBean, ItemMainBinding> innerAdapter = new BGABindingRecyclerViewAdapter<>(R.layout.item_main);
     public LRecyclerViewAdapter adapter = new LRecyclerViewAdapter(innerAdapter);

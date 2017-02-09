@@ -3,16 +3,16 @@ package com.dsc.databindingdemo.ui;
 import android.os.Bundle;
 
 import com.dsc.databindingdemo.R;
-import com.dsc.databindingdemo.core.BaseFragment;
-import com.dsc.databindingdemo.core.BaseViewModel;
-import com.dsc.databindingdemo.core.EmptyPresenter;
 import com.dsc.databindingdemo.databinding.FragmentBBinding;
+import com.reny.mvpvmlib.BaseFragment;
+import com.reny.mvpvmlib.BaseViewModel;
+import com.reny.mvpvmlib.EmptyPresenter;
 
 /**
  * Created by reny on 2017/1/9.
  */
 
-public class FragmentB extends BaseFragment<FragmentBBinding, BaseViewModel, EmptyPresenter>{
+public class FragmentB extends BaseFragment<FragmentBBinding, BaseViewModel, EmptyPresenter> {
 
     @Override
     protected void onCreateViewLazy(Bundle savedInstanceState) {

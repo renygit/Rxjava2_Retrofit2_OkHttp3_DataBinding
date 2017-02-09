@@ -1,4 +1,4 @@
-package com.dsc.databindingdemo.core;
+package com.reny.mvpvmlib;
 
 public class EmptyPresenter extends BasePresenter<BaseViewModel> {
     @Override

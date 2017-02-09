@@ -1,15 +1,13 @@
-package com.dsc.databindingdemo.core;
+package com.reny.mvpvmlib;
 
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.dsc.databindingdemo.utils.SwipeBackHelperUtils;
 import com.jude.swipbackhelper.SwipeBackHelper;
+import com.reny.mvpvmlib.utils.SwipeBackUtils;
 import com.zhy.changeskin.SkinManager;
-
-import java.io.Serializable;
 
 /**
  * Created by reny on 2017/1/4.
@@ -27,13 +25,13 @@ public abstract class BaseActivity<DB extends ViewDataBinding, VM extends BaseVi
         binding = DataBindingUtil.setContentView(this, getLayoutId());
 
         SwipeBackHelper.onCreate(this);
-        SwipeBackHelperUtils.EnableSwipeActivity(this);
+        SwipeBackUtils.EnableSwipeActivity(this, null);
 
         if(null == presenter){
             try {
                 if(null == getPresenterClass()) presenter = null;
                 else presenter = getPresenterClass().newInstance();
-            } catch (java.lang.InstantiationException e) {
+            } catch (InstantiationException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
@@ -44,7 +42,7 @@ public abstract class BaseActivity<DB extends ViewDataBinding, VM extends BaseVi
             try {
                 if(null == getViewModelClass()) viewModel = null;
                 else viewModel = getViewModelClass().newInstance();
-            } catch (java.lang.InstantiationException e) {
+            } catch (InstantiationException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
                 e.printStackTrace();

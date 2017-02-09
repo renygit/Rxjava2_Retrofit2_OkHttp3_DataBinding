@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.dsc.databindingdemo.core.http.converter;
+package com.reny.mvpvmlib.http.converter;
 
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;

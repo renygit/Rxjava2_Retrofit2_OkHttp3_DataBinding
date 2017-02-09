@@ -4,18 +4,16 @@ import android.os.Bundle;
 import android.widget.CompoundButton;
 
 import com.dsc.databindingdemo.R;
-import com.dsc.databindingdemo.core.BaseFragment;
-import com.dsc.databindingdemo.core.BaseViewModel;
-import com.dsc.databindingdemo.core.EmptyPresenter;
 import com.dsc.databindingdemo.databinding.FragmentCBinding;
 import com.dsc.databindingdemo.presenter.FCPresenter;
 import com.dsc.databindingdemo.presenter.vm.FCViewModel;
+import com.reny.mvpvmlib.BaseFragment;
 
 /**
  * Created by reny on 2017/1/9.
  */
 
-public class FragmentC extends BaseFragment<FragmentCBinding, FCViewModel, FCPresenter>{
+public class FragmentC extends BaseFragment<FragmentCBinding, FCViewModel, FCPresenter> {
 
     @Override
     protected void onCreateViewLazy(Bundle savedInstanceState) {

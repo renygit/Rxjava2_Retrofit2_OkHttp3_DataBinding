@@ -1,7 +1,7 @@
 package com.dsc.databindingdemo.presenter;
 
-import com.dsc.databindingdemo.core.BasePresenter;
 import com.dsc.databindingdemo.presenter.vm.FCViewModel;
+import com.reny.mvpvmlib.BasePresenter;
 import com.zhy.changeskin.SkinManager;
 
 /**

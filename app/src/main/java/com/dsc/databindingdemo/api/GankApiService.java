@@ -10,9 +10,9 @@ import retrofit2.http.Path;
  * Created by reny on 2017/1/5.
  */
 
-public interface BaiduApiService {
+public interface GankApiService {
 
-    //ServiceFactory->createService() 获取属性为BASE_URL的值
+    //BaseServiceFactory->createService() 获取属性为BASE_URL的值
     String BASE_URL = "http://gank.io/api/data/";
 
     @GET("all/20/{page}")
