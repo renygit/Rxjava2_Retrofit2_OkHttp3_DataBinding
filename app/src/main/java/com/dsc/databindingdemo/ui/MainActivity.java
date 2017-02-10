@@ -1,41 +1,54 @@
 package com.dsc.databindingdemo.ui;
 
-import android.graphics.Color;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.dsc.databindingdemo.R;
+import com.dsc.databindingdemo.api.APIConfig;
 import com.dsc.databindingdemo.databinding.ActivityMainBinding;
 import com.dsc.databindingdemo.presenter.MainPresenter;
 import com.dsc.databindingdemo.presenter.vm.MainViewModel;
 import com.reny.mvpvmlib.BaseActivity;
 import com.reny.mvpvmlib.utils.SwipeBackUtils;
-import com.shizhefei.view.indicator.IndicatorViewPager;
-import com.shizhefei.view.indicator.transition.OnTransitionTextListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewModel, MainPresenter> {
 
-    private IndicatorViewPager indicatorViewPager;
-
     @Override
     protected void init(Bundle savedInstanceState) {
         SwipeBackUtils.DisableSwipeActivity(this);
 
-        binding.tabIndicator.setOnTransitionListener(new OnTransitionTextListener().setColor(Color.RED, Color.GRAY));
-        indicatorViewPager = new IndicatorViewPager(binding.tabIndicator, binding.vp);
-        indicatorViewPager.setAdapter(new MyAdapter(getSupportFragmentManager()));
-        // 禁止viewpager的滑动事件
-        binding.vp.setCanScroll(false);
-        // 设置viewpager保留界面不重新加载的页面数量
-        binding.vp.setOffscreenPageLimit(3);
+        binding.toolbar.setTitle(getString(R.string.app_name));
+        setSupportActionBar(binding.toolbar);
+        binding.toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.menu_about:
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setData(Uri.parse(APIConfig.ABOUT_URL));
+                        startActivity(intent);
+                        break;
+                }
+                return true;
+            }
+        });
+
+        List<Fragment> fragmentList = new ArrayList<>();
+        fragmentList.add(new FragmentA());
+        fragmentList.add(new FragmentB());
+        fragmentList.add(new FragmentC());
+        fragmentList.add(new FragmentD());
+        binding.vp.setOffscreenPageLimit(fragmentList.size());
+        //we need the savedInstanceState to retrieve the position
+        binding.tabLayout.initialize(binding.vp, getSupportFragmentManager(), fragmentList, savedInstanceState);
     }
 
     @Override
@@ -54,41 +67,16 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     }
 
 
-    private class MyAdapter extends IndicatorViewPager.IndicatorFragmentPagerAdapter {
-        private String[] tabNames = {"主页", "消息", "我"};
-        private int[] tabIcons = {R.drawable.maintab_1_selector, R.drawable.maintab_2_selector, R.drawable.maintab_3_selector};
-        private LayoutInflater inflater;
-        private List<Fragment> fragmentList;
-
-        public MyAdapter(FragmentManager fragmentManager) {
-            super(fragmentManager);
-            inflater = LayoutInflater.from(getApplicationContext());
-
-            fragmentList = new ArrayList<>();
-            fragmentList.add(new FragmentA());
-            fragmentList.add(new FragmentB());
-            fragmentList.add(new FragmentC());
-        }
-
-        @Override
-        public int getCount() {
-            return tabNames.length;
-        }
-
-        @Override
-        public View getViewForTab(int position, View convertView, ViewGroup container) {
-            if (convertView == null) {
-                convertView = inflater.inflate(R.layout.tab_main, container, false);
-            }
-            TextView textView = (TextView) convertView;
-            textView.setText(tabNames[position]);
-            textView.setCompoundDrawablesWithIntrinsicBounds(0, tabIcons[position], 0, 0);
-            return textView;
-        }
-
-        @Override
-        public Fragment getFragmentForPage(int position) {
-            return fragmentList.get(position);
-        }
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        binding.tabLayout.saveState(outState);
+        super.onSaveInstanceState(outState);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
 }

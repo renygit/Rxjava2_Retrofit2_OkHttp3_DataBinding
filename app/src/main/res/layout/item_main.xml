@@ -28,7 +28,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text='@{model.type+"--"+model.desc}'/>
+            android:text='@{model.type+"--"+model.desc}'
+            android:textColor="@color/text_color" />
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:layout_width="match_parent"

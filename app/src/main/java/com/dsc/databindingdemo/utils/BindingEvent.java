@@ -38,9 +38,9 @@ public class BindingEvent {
     @BindingAdapter("OnFreshListener")
     public static void OnFreshListener(final LRecyclerView rv, final BasePresenter presenter){
         rv.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader); //设置下拉刷新Progress的样式
-        rv.setArrowImageView(R.drawable.ic_pulltorefresh_arrow);  //设置下拉刷新箭头
-        rv.setHeaderViewColor(R.color.colorAccent, R.color.text_color ,android.R.color.white);
-        rv.setFooterViewColor(R.color.colorAccent, R.color.text_color ,android.R.color.white);
+        rv.setArrowImageView(R.mipmap.ic_refresh_arrow);  //设置下拉刷新箭头
+        rv.setHeaderViewColor(R.color.refresh_tip_color, R.color.refresh_tip_color ,R.color.bg_color);
+        rv.setFooterViewColor(R.color.refresh_tip_color, R.color.refresh_tip_color ,R.color.bg_color);
         //设置底部加载文字提示
         rv.setFooterViewHint("加载中","我是底线","网络不给力啊，点击重试");
         rv.setLoadingMoreProgressStyle(ProgressStyle.BallSpinFadeLoader);
