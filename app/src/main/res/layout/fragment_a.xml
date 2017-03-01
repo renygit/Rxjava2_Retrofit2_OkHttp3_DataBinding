@@ -4,6 +4,7 @@
 
     <data>
 
+        <import type="android.view.View" />
         <import type="com.dsc.databindingdemo.presenter.FAPresenter" />
         <import type="com.dsc.databindingdemo.presenter.vm.FAViewModel" />
 
@@ -25,9 +26,20 @@
             android:id="@+id/rv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="@{viewModel.showState ? View.GONE : View.VISIBLE}"
             app:layoutManager="@{viewModel.layoutManager}"
             app:OnFreshListener="@{presenter}"
             app:adapter="@{viewModel.adapter}"
             app:isRefreshing="@{viewModel.isRefreshing}"/>
+
+
+        <com.reny.mvpvmlib.widget.EmptyStateView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:indicatorColor="@color/colorAccent"
+            app:indicatorName="BallPulseIndicator"
+            app:state="@{viewModel.state}"
+            app:retry="@{presenter}"/>
+
     </LinearLayout>
 </layout>

@@ -46,4 +46,5 @@ dependencies {
     //下拉刷新库
     compile 'com.github.jdsjlzx:LRecyclerView:1.3.3'
     compile 'eu.long1:spacetablayout:1.0.4'
+    
 }

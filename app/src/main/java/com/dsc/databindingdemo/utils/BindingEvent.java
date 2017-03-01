@@ -3,6 +3,7 @@ package com.dsc.databindingdemo.utils;
 import android.databinding.BindingAdapter;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.dsc.databindingdemo.R;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -12,6 +13,8 @@ import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.github.jdsjlzx.recyclerview.ProgressStyle;
 import com.reny.mvpvmlib.BasePresenter;
+import com.reny.mvpvmlib.model.ObservableState;
+import com.reny.mvpvmlib.widget.EmptyStateView;
 
 /**
  * Created by reny on 2017/1/5.
@@ -62,6 +65,23 @@ public class BindingEvent {
     @BindingAdapter("isRefreshing")
     public static void onFinishFreshAndLoad(final LRecyclerView rv, boolean isRefreshing){
         if(!isRefreshing)rv.refreshComplete();
+    }
+
+
+    @BindingAdapter("state")
+    public static void setLoadState(final EmptyStateView esv, ObservableState state){
+        esv.setState(state.getState());
+    }
+
+    @BindingAdapter("retry")
+    public static void setRetry(final EmptyStateView esv, final BasePresenter presenter){
+        esv.onRetry(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                esv.setState(EmptyStateView.EmptyState.loading);
+                presenter.loadData(true);
+            }
+        });
     }
 
 }

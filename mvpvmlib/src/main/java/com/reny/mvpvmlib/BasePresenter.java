@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 
 import com.reny.mvpvmlib.utils.LogUtils;
+import com.reny.mvpvmlib.widget.EmptyStateView;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -32,6 +33,7 @@ public abstract class BasePresenter<VM extends BaseViewModel> implements Present
     @Override
     public void onCreate() {
         this.mCompositeDisposable = new CompositeDisposable();
+        if(null != viewModel) viewModel.setState(EmptyStateView.EmptyState.loading);
         onCreatePresenter();
     }
 
@@ -58,6 +60,11 @@ public abstract class BasePresenter<VM extends BaseViewModel> implements Present
 
     @Override
     public void onFailure(Throwable e){
+        if(null != viewModel) {
+            viewModel.setState(EmptyStateView.EmptyState.error);
+            viewModel.refreshComplete();
+        }
+
         if(null != e && null != e.getMessage())
             LogUtils.e(e.getMessage());
     }

@@ -22,6 +22,7 @@ public class FAViewModel extends BaseViewModel {
     private List<GankData.ResultsBean> datas;
 
     public void setData(boolean isRefresh, GankData data) {
+        setDataState(data.getResults());
         if(null == datas)datas = new ArrayList<>();
         if(isRefresh)datas.clear();
         datas.addAll(data.getResults());

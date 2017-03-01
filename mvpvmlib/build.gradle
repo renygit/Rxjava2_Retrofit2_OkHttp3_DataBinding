@@ -48,4 +48,6 @@ dependencies {
     compile 'com.github.franmontiel:PersistentCookieJar:v1.0.0'
     //皮肤切换
     compile 'com.zhy:changeskin:4.0.2'
+    //Loading动画库
+    compile 'com.wang.avi:library:2.1.3'
 }

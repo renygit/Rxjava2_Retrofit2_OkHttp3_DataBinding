@@ -2,14 +2,13 @@ package com.dsc.databindingdemo.presenter;
 
 import android.content.Intent;
 
-import com.dsc.databindingdemo.api.GankApiService;
-import com.dsc.databindingdemo.core.ServiceFactory;
 import com.dsc.databindingdemo.core.ServiceHelper;
 import com.dsc.databindingdemo.model.GankData;
 import com.dsc.databindingdemo.presenter.vm.FAViewModel;
 import com.dsc.databindingdemo.ui.WebActivity;
 import com.reny.mvpvmlib.BasePresenter;
 import com.reny.mvpvmlib.utils.LogUtils;
+import com.reny.mvpvmlib.widget.EmptyStateView;
 
 import cn.bingoogolapple.androidcommon.adapter.BGABindingViewHolder;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -34,13 +33,14 @@ public class FAPresenter extends BasePresenter<FAViewModel> {
     public void loadData(final boolean isRefresh) {
         if(isRefresh) page = 1;
 
+        //LogUtils.e("loadata......");
         addDisposable(ServiceHelper.getGankAS().getGankData(page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<GankData>() {
                     @Override
                     public void onNext(GankData value) {
-                        LogUtils.json(value);
+                        //LogUtils.json(value);
                         page++;
                         viewModel.setData(isRefresh, value);
                     }
@@ -48,7 +48,6 @@ public class FAPresenter extends BasePresenter<FAViewModel> {
                     @Override
                     public void onError(Throwable e) {
                         onFailure(e);
-                        viewModel.refreshComplete();
                     }
 
                     @Override

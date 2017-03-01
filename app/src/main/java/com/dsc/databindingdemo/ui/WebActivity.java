@@ -8,11 +8,13 @@ import com.dsc.databindingdemo.databinding.ActivityWebBinding;
 import com.reny.mvpvmlib.BaseActivity;
 import com.reny.mvpvmlib.BaseViewModel;
 import com.reny.mvpvmlib.EmptyPresenter;
+import com.reny.mvpvmlib.utils.SwipeBackUtils;
 
 public class WebActivity extends BaseActivity<ActivityWebBinding, BaseViewModel, EmptyPresenter> {
 
     @Override
     protected void init(Bundle savedInstanceState) {
+        SwipeBackUtils.EnableSwipeActivity(this, 0.1f);//设置可滑动退出的范围
         if(null != getIntent()){
             String url = getIntent().getStringExtra("url");
             if(TextUtils.isEmpty(url))url = "https://www.baidu.com";

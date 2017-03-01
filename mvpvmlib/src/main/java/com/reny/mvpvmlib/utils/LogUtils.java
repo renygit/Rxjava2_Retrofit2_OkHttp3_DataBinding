@@ -6,7 +6,7 @@ import com.orhanobut.logger.Logger;
 public class LogUtils {
 
     /**
-     * 是否写入日志文件
+     * 是否打印日志
      */
     public static final boolean isPrint = InitUtils.isPrint;
 
