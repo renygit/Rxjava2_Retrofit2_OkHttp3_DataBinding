@@ -5,7 +5,7 @@
 maven { url "https://jitpack.io" }
   
   dependencies {<br>
-	        compile 'com.github.ADL1121:Rxjava2_Retrofit2_OkHttp3_DataBinding:0.0.1'<br>
+	        compile 'com.github.ADL1121:Rxjava2_Retrofit2_OkHttp3_DataBinding:0.0.2'<br>
 	}<br>
   
   
@@ -45,3 +45,4 @@ compile 'com.anupcowkur:reservoir:3.1.0'<br>
 compile 'com.github.franmontiel:PersistentCookieJar:v1.0.0'<br>
 //皮肤切换<br>
 compile 'com.zhy:changeskin:4.0.2'<br>
+compile 'com.wang.avi:library:2.1.3'<br>
