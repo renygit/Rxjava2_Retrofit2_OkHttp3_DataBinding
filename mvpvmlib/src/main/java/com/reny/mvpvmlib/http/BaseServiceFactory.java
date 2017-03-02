@@ -5,7 +5,6 @@ import com.android.annotations.Nullable;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
-import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.reny.mvpvmlib.http.converter.GsonConverterFactory;
 import com.reny.mvpvmlib.utils.InitUtils;
 import com.reny.mvpvmlib.utils.LogUtils;
@@ -22,6 +21,7 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Response;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 /**
  * Created by reny on 2017/1/5.

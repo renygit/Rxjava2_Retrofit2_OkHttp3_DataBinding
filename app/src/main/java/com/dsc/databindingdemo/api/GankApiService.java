@@ -13,9 +13,19 @@ import retrofit2.http.Path;
 public interface GankApiService {
 
     //BaseServiceFactory->createService() 获取属性为BASE_URL的值
-    String BASE_URL = "http://gank.io/api/data/";
+    String BASE_URL = "https://gank.io/api/";
 
-    @GET("all/20/{page}")
+    @GET("data/all/20/{page}")
     Observable<GankData> getGankData(@Path("page") int page);
+
+    /**
+     * 分类数据: http://gank.io/api/data/数据类型/请求个数/第几页
+     * 数据类型： 福利 | Android | iOS | 休息视频 | 拓展资源 | 前端 | all
+     * 请求个数： 数字，大于0
+     * 第几页：数字，大于0
+     * eg: http://gank.io/api/data/Android/10/1
+     */
+    @GET("data/{category}/{count}/{page}")
+    Observable<GankData> getGankIoData(@Path("category") String category, @Path("count") int count, @Path("page") int page);
 
 }

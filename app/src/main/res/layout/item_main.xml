@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewHolder"
             type="cn.bingoogolapple.androidcommon.adapter.BGABindingViewHolder" />
@@ -19,23 +20,43 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clickable="true"
         android:descendantFocusability="blocksDescendants"
         android:orientation="vertical"
-        android:padding="5dp"
-        android:clickable="true"
+        android:layout_margin="8dp"
         app:onNoDoubleClick="@{() -> itemEventHandler.onClickItem(viewHolder, model)}">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text='@{model.type+"--"+model.desc}'
-            android:textColor="@color/text_color" />
-
-        <com.facebook.drawee.view.SimpleDraweeView
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            app:actualImageScaleType="centerInside"
-            app:frescoImgUrl="@{model.images[0]}"/>
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            app:cardCornerRadius="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="5dp"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:paddingTop="10dp">
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:actualImageScaleType="centerCrop"
+                    app:viewAspectRatio="0.714"
+                    app:frescoImgUrl="@{model.url}" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="center_horizontal"
+                    android:text='@{model.createdAt.substring(0, 10)}'
+                    android:textColor="@color/text_color" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
 
     </LinearLayout>
 </layout>

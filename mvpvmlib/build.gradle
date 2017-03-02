@@ -38,10 +38,11 @@ dependencies {
     compile 'org.reactivestreams:reactive-streams:1.0.0'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.0'
     //OkHttp3 + Retrofit2
-    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+    compile 'com.squareup.okhttp3:okhttp:3.6.0'
     compile 'com.squareup.okio:okio:1.10.0'
-    compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    compile 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
+    compile 'com.squareup.retrofit2:retrofit:2.2.0'
+    //compile 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
     // Reservoir   缓存
     compile 'com.anupcowkur:reservoir:3.1.0'
     //cookie管理

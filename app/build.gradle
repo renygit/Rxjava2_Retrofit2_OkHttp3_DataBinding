@@ -28,10 +28,11 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:support-v4:25.1.1'
     testCompile 'junit:junit:4.12'
-    compile project(':mvpvmlib')
+    compile 'com.android.support:support-v4:25.1.1'
+    compile 'com.android.support:cardview-v7:25.1.1'
 
+    compile project(':mvpvmlib')
     //RecyclerView万能Adapter
     compile 'cn.bingoogolapple:bga-adapter:1.1.5@aar'
     //compile 'zlc.season:rxdownload:1.1.2'
@@ -46,5 +47,5 @@ dependencies {
     //下拉刷新库
     compile 'com.github.jdsjlzx:LRecyclerView:1.3.3'
     compile 'eu.long1:spacetablayout:1.0.4'
-    
+
 }

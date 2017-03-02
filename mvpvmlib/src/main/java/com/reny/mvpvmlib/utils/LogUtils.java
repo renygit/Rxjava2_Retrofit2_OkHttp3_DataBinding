@@ -1,5 +1,7 @@
 package com.reny.mvpvmlib.utils;
 
+import android.util.Log;
+
 import com.orhanobut.logger.Logger;
 
 
@@ -18,14 +20,23 @@ public class LogUtils {
      * @param msg
      */
     public final static void e(String TAG, String msg) {
-        if (isPrint)
-            Logger.e(TAG, msg);
-
+        if (isPrint){
+            try {
+                Logger.e(TAG, msg);
+            }catch (Exception e){
+                Log.e("LogUtils.e", msg);
+            }
+        }
     }
 
     public final static void e(String msg) {
-        if (isPrint)
-            Logger.e(msg, "");
+        if (isPrint) {
+            try {
+                Logger.e(msg, "");
+            }catch (Exception e){
+                Log.e("LogUtils.e", msg);
+            }
+        }
     }
 
     /**
@@ -35,9 +46,13 @@ public class LogUtils {
      * @param msg
      */
     public final static void w(String TAG, String msg) {
-        if (isPrint)
-            Logger.w(TAG, msg);
-
+        if (isPrint){
+            try {
+                Logger.w(TAG, msg);
+            }catch (Exception e){
+                Log.w("LogUtils.w", msg);
+            }
+        }
     }
 
     /**
@@ -47,8 +62,13 @@ public class LogUtils {
      * @param msg
      */
     public final static void d(String TAG, String msg) {
-        if (isPrint)
-            Logger.d(TAG, msg);
+        if (isPrint){
+            try {
+                Logger.d(TAG, msg);
+            }catch (Exception e){
+                Log.d("LogUtils.d", msg);
+            }
+        }
     }
 
     /**
@@ -58,23 +78,38 @@ public class LogUtils {
      * @param msg
      */
     public final static void i(String TAG, String msg) {
-        if (isPrint)
-            Logger.i(TAG, msg);
+        if (isPrint){
+            try {
+                Logger.i(TAG, msg);
+            }catch (Exception e){
+                Log.i("LogUtils.i", msg);
+            }
+        }
     }
 
     public final static void d(String msg) {
-        if (isPrint)
-            Logger.d(msg);
+        if (isPrint){
+            try {
+                Logger.d(msg);
+            }catch (Exception e){
+                Log.d("LogUtils.d", msg);
+            }
+        }
     }
 
     public final static void json(Object obj){
-        if(isPrint)
-            Logger.json(InitUtils.gson.toJson(obj));
+        if(isPrint){
+            try {
+                Logger.json(InitUtils.gson.toJson(obj));
+            }catch (Exception e){
+                Log.e("LogUtils.json", obj.toString());
+            }
+        }
     }
 
     public final static void e(Throwable e){
         if (isPrint)
-            Logger.d(e.getMessage());
+            e(e.getMessage());
     }
 }
 
