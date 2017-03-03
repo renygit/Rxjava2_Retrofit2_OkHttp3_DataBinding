@@ -24,6 +24,10 @@
             android:name=".ui.WebActivity"
             android:screenOrientation="portrait"
             android:theme="@style/TranslucentAppTheme" />
+        <activity
+            android:name=".ui.ImagesActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/TranslucentNoAnimAppTheme" />
     </application>
 
 </manifest>

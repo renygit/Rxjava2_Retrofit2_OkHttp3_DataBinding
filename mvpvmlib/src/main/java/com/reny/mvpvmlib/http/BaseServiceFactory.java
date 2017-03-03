@@ -1,7 +1,8 @@
 package com.reny.mvpvmlib.http;
 
-import com.android.annotations.NonNull;
-import com.android.annotations.Nullable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;

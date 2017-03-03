@@ -42,8 +42,10 @@
                 android:paddingTop="10dp">
 
                 <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/sdv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:transitionName="image"
                     app:actualImageScaleType="centerCrop"
                     app:viewAspectRatio="0.714"
                     app:frescoImgUrl="@{model.url}" />

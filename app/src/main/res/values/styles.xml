@@ -16,6 +16,14 @@
         <item name="android:windowAnimationStyle">@style/SlideRightAnimation</item>
     </style>
 
+    <style name="TranslucentNoAnimAppTheme" parent="AppTheme">
+        <!--背景透明-->
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--无进入动画-->
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+
     <style name="Color1SwitchStyle">
         <item name="colorControlActivated">@color/colorPrimary</item>
     </style>

@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Window;
 
 import com.jude.swipbackhelper.SwipeBackHelper;
 import com.reny.mvpvmlib.utils.SwipeBackUtils;
@@ -21,6 +22,7 @@ public abstract class BaseActivity<DB extends ViewDataBinding, VM extends BaseVi
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        preOnCreate();
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, getLayoutId());
 
@@ -79,6 +81,8 @@ public abstract class BaseActivity<DB extends ViewDataBinding, VM extends BaseVi
         SkinManager.getInstance().unregister(this);
         super.onDestroy();
     }
+
+    protected void preOnCreate(){}
 
     protected abstract void init(Bundle savedInstanceState);
 
