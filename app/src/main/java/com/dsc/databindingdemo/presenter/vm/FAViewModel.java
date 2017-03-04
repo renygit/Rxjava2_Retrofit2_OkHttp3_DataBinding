@@ -28,7 +28,6 @@ public class FAViewModel extends BaseViewModel {
         datas.addAll(data.getResults());
         if(isRefresh)innerAdapter.setData(datas);
         adapter.notifyDataSetChanged();
-        refreshComplete();
     }
 
 }

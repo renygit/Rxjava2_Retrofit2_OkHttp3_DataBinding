@@ -9,9 +9,14 @@ import android.view.View;
 import com.dsc.databindingdemo.R;
 import com.dsc.databindingdemo.core.ServiceHelper;
 import com.dsc.databindingdemo.model.GankData;
+import com.dsc.databindingdemo.model.custom.ImgsInfo;
 import com.dsc.databindingdemo.presenter.vm.FAViewModel;
 import com.dsc.databindingdemo.ui.ImagesActivity;
+import com.dsc.databindingdemo.utils.ToastUtil;
 import com.reny.mvpvmlib.BasePresenter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import cn.bingoogolapple.androidcommon.adapter.BGABindingViewHolder;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -27,6 +32,8 @@ public class FAPresenter extends BasePresenter<FAViewModel> {
     private String category = "福利";
     private int count = 10;
     int page = 1;
+    private List<String> imgsList;
+    private ImgsInfo imgsInfo;
 
     @Override
     public void onCreatePresenter() {
@@ -39,21 +46,21 @@ public class FAPresenter extends BasePresenter<FAViewModel> {
     public void loadData(final boolean isRefresh) {
         if(isRefresh) page = 1;
 
-        //LogUtils.e("loadata......"+type.toString());
         addDisposable(ServiceHelper.getGankAS().getGankIoData(category, count, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<GankData>() {
                     @Override
                     public void onNext(GankData value) {
-                        //LogUtils.json(value);
                         page++;
                         viewModel.setData(isRefresh, value);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        //System.out.println(e.getMessage());
+                        if (isRefresh && viewModel.firstLoadDataSuc){
+                            ToastUtil.showShort(R.string.refresh_error);
+                        }
                         onFailure(e);
                     }
 
@@ -65,14 +72,25 @@ public class FAPresenter extends BasePresenter<FAViewModel> {
 
 
     public void onClickItem(BGABindingViewHolder holder, GankData.ResultsBean model) {
-        //LogUtils.e("onClickItem.."+model.getUrl());
+        if(null == imgsList)imgsList = new ArrayList<>();
+        else imgsList.clear();
+
+        List<GankData.ResultsBean> datas = viewModel.innerAdapter.getData();
+        for (GankData.ResultsBean bean:datas) {
+            imgsList.add(bean.getUrl());
+        }
+        if(null == imgsInfo)imgsInfo = new ImgsInfo();
+        imgsInfo.setImgsList(imgsList);
+        int curPos = holder.getAdapterPositionWrapper() - 1;
+        imgsInfo.setCurPos(curPos < 0 ? 0 : curPos);
+
         View sdv = holder.getBinding().getRoot().findViewById(R.id.sdv);
 
         Intent intent = new Intent(context, ImagesActivity.class);
-        //holder.getAdapterPosition();
-        intent.putExtra("url", model.getUrl());
+        intent.putExtra(ImgsInfo.KEY, imgsInfo);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            //转场动画似乎对 SimpleDraweeView 不起作用 因此没有写全transitionName
             context.startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(activity, sdv, "image").toBundle());
         }else {
             context.startActivity(intent);

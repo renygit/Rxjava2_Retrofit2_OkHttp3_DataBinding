@@ -8,6 +8,7 @@ import android.view.View;
 import com.dsc.databindingdemo.R;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.jdsjlzx.interfaces.OnLoadMoreListener;
+import com.github.jdsjlzx.interfaces.OnNetWorkErrorListener;
 import com.github.jdsjlzx.interfaces.OnRefreshListener;
 import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
@@ -60,11 +61,34 @@ public class BindingEvent {
                 presenter.loadData(false);
             }
         });
+
     }
 
     @BindingAdapter("isRefreshing")
     public static void onFinishFreshAndLoad(final LRecyclerView rv, boolean isRefreshing){
         if(!isRefreshing)rv.refreshComplete();
+    }
+
+    @BindingAdapter({"isError", "presenter"})
+    public static void setLoadError(LRecyclerView rv, boolean isError, final BasePresenter presenter) {
+        if(isError) {
+            rv.setOnNetWorkErrorListener(new OnNetWorkErrorListener() {
+                @Override
+                public void reload() {
+                    presenter.loadData(false);
+                }
+            });
+        }
+    }
+
+    @BindingAdapter("noMore")
+    public static void setNoMore(final LRecyclerView rv, boolean noMore){
+        rv.setNoMore(noMore);
+    }
+
+    @BindingAdapter("loadMoreEnabled")
+    public static void setLoadMoreEnabled(final LRecyclerView rv, boolean enable){
+        rv.setLoadMoreEnabled(enable);
     }
 
 

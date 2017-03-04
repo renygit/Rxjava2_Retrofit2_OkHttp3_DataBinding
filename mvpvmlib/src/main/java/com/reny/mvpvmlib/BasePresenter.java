@@ -61,7 +61,11 @@ public abstract class BasePresenter<VM extends BaseViewModel> implements Present
     @Override
     public void onFailure(Throwable e){
         if(null != viewModel) {
-            viewModel.setState(EmptyStateView.EmptyState.error);
+            if (!viewModel.firstLoadDataSuc) viewModel.setState(EmptyStateView.EmptyState.error);
+            else {
+                viewModel.isError.set(false);
+                viewModel.isError.set(true);
+            }
             viewModel.refreshComplete();
         }
 

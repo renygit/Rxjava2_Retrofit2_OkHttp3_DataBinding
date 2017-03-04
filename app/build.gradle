@@ -18,6 +18,26 @@ android {
         }
     }
 
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+
+    packagingOptions {//去掉jar包重复的类
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/LGPL2.1'
+        exclude 'META-INF/ASL2.0'
+    }
+
     dataBinding {
         enabled = true
     }
@@ -31,7 +51,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile "com.android.support:support-v4:$gradle.supportLibraryVersion"
     compile "com.android.support:cardview-v7:$gradle.supportLibraryVersion"
-
     compile project(':mvpvmlib')
     //RecyclerView万能Adapter
     compile 'cn.bingoogolapple:bga-adapter:1.1.5@aar'
@@ -48,5 +67,5 @@ dependencies {
     compile 'com.github.jdsjlzx:LRecyclerView:1.3.3'
     compile 'eu.long1:spacetablayout:1.0.4'
     compile 'me.relex:photodraweeview:1.1.2'
-
+    compile(name: 'supertoast-release', ext: 'aar')
 }

@@ -5,6 +5,7 @@
     <color name="colorAccent">#fe9800</color>
 
     <color name="refresh_tip_color">#999999</color>
+    <color name="img_error_color">#9b9b9b</color>
 
     <color name="text_color">#222222</color>
     <color name="text_color_night">#FFFFFF</color>

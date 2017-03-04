@@ -30,7 +30,10 @@
             app:layoutManager="@{viewModel.layoutManager}"
             app:OnFreshListener="@{presenter}"
             app:adapter="@{viewModel.adapter}"
-            app:isRefreshing="@{viewModel.isRefreshing}"/>
+            app:isRefreshing="@{viewModel.isRefreshing}"
+            app:noMore="@{viewModel.noMore}"
+            app:isError="@{viewModel.isError}"
+            app:presenter="@{presenter}"/>
 
 
         <com.reny.mvpvmlib.widget.EmptyStateView

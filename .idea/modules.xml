@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/DataBindingDemo.iml" filepath="$PROJECT_DIR$/DataBindingDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Rxjava2_Retrofit2_OkHttp3_DataBinding.iml" filepath="$PROJECT_DIR$/Rxjava2_Retrofit2_OkHttp3_DataBinding.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/mvpvmlib/mvpvmlib.iml" filepath="$PROJECT_DIR$/mvpvmlib/mvpvmlib.iml" />
     </modules>
