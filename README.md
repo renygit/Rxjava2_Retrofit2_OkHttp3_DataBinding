@@ -5,7 +5,7 @@
 maven { url "https://jitpack.io" }
   
   dependencies {<br>
-	        compile 'com.github.ADL1121:Rxjava2_Retrofit2_OkHttp3_DataBinding:0.0.2'<br>
+	        compile 'com.github.ADL1121:Rxjava2_Retrofit2_OkHttp3_DataBinding:0.0.3'<br>
 	}<br>
   
   
