@@ -55,6 +55,7 @@ public abstract class BaseActivity<DB extends ViewDataBinding, VM extends BaseVi
             presenter.setViewModel(viewModel);
         }
 
+        preInit(savedInstanceState);
         this.init(savedInstanceState);
 
         if (null != presenter) {
@@ -83,6 +84,7 @@ public abstract class BaseActivity<DB extends ViewDataBinding, VM extends BaseVi
     }
 
     protected void preOnCreate(){}
+    protected void preInit(Bundle savedInstanceState){}
 
     protected abstract void init(Bundle savedInstanceState);
 

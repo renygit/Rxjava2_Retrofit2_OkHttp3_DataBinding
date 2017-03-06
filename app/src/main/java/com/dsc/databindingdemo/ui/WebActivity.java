@@ -4,13 +4,14 @@ import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.dsc.databindingdemo.R;
+import com.dsc.databindingdemo.core.MyBaseActivity;
 import com.dsc.databindingdemo.databinding.ActivityWebBinding;
 import com.reny.mvpvmlib.BaseActivity;
 import com.reny.mvpvmlib.BaseViewModel;
 import com.reny.mvpvmlib.EmptyPresenter;
 import com.reny.mvpvmlib.utils.SwipeBackUtils;
 
-public class WebActivity extends BaseActivity<ActivityWebBinding, BaseViewModel, EmptyPresenter> {
+public class WebActivity extends MyBaseActivity<ActivityWebBinding, BaseViewModel, EmptyPresenter> {
 
     @Override
     protected void init(Bundle savedInstanceState) {

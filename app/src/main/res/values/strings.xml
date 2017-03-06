@@ -1,5 +1,3 @@
 <resources>
     <string name="app_name">MVPVM</string>
-
-    <string name="refresh_error">刷新失败，请稍后重试</string>
 </resources>

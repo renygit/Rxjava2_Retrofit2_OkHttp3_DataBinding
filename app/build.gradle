@@ -65,7 +65,14 @@ dependencies {
     compile 'com.facebook.fresco:animated-gif:1.0.0'
     //下拉刷新库
     compile 'com.github.jdsjlzx:LRecyclerView:1.3.3'
+    //首页Tab库
     compile 'eu.long1:spacetablayout:1.0.4'
+    //图片放大缩小
     compile 'me.relex:photodraweeview:1.1.2'
+    //不需要权限的Toast(部分手机上Toast需要权限)
     compile(name: 'supertoast-release', ext: 'aar')
+    //状态栏相关库
+    compile ('com.github.niorgai:StatusBarCompat:2.1.3', {
+        exclude group: 'com.android.support'
+    })
 }

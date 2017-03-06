@@ -17,6 +17,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingTop="@dimen/status_bar_height"
         android:orientation="vertical">
 
         <android.support.v7.widget.SwitchCompat
@@ -25,6 +26,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:checked="@{viewModel.isDarkTheme}"
-            android:theme="@style/Color1SwitchStyle" />
+            android:theme="@style/ColorSwitchStyle" />
     </LinearLayout>
 </layout>

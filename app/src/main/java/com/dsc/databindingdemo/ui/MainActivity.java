@@ -10,6 +10,7 @@ import android.view.MenuItem;
 
 import com.dsc.databindingdemo.R;
 import com.dsc.databindingdemo.api.APIConfig;
+import com.dsc.databindingdemo.core.MyBaseActivity;
 import com.dsc.databindingdemo.databinding.ActivityMainBinding;
 import com.dsc.databindingdemo.presenter.MainPresenter;
 import com.dsc.databindingdemo.presenter.vm.MainViewModel;
@@ -19,7 +20,7 @@ import com.reny.mvpvmlib.utils.SwipeBackUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewModel, MainPresenter> {
+public class MainActivity extends MyBaseActivity<ActivityMainBinding, MainViewModel, MainPresenter> {
 
     @Override
     protected void init(Bundle savedInstanceState) {

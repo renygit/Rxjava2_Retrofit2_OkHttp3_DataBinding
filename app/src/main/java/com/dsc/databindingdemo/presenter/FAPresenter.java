@@ -30,7 +30,7 @@ import io.reactivex.schedulers.Schedulers;
 public class FAPresenter extends BasePresenter<FAViewModel> {
 
     private String category = "福利";
-    private int count = 10;
+    private int count;
     int page = 1;
     private List<String> imgsList;
     private ImgsInfo imgsInfo;
@@ -39,6 +39,7 @@ public class FAPresenter extends BasePresenter<FAViewModel> {
     public void onCreatePresenter() {
         viewModel.innerAdapter.setItemEventHandler(this);
         viewModel.layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        count = context.getResources().getInteger(R.integer.load_count);
         loadData(true);
     }
 
@@ -71,6 +72,7 @@ public class FAPresenter extends BasePresenter<FAViewModel> {
     }
 
 
+    //列表Item点击 与xml绑定
     public void onClickItem(BGABindingViewHolder holder, GankData.ResultsBean model) {
         if(null == imgsList)imgsList = new ArrayList<>();
         else imgsList.clear();

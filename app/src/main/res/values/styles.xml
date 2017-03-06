@@ -24,7 +24,7 @@
         <item name="android:windowAnimationStyle">@null</item>
     </style>
 
-    <style name="Color1SwitchStyle">
+    <style name="ColorSwitchStyle">
         <item name="colorControlActivated">@color/colorPrimary</item>
     </style>
 
