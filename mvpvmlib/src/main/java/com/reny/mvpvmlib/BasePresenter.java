@@ -3,8 +3,10 @@ package com.reny.mvpvmlib;
 import android.app.Activity;
 import android.content.Context;
 
+import com.reny.mvpvmlib.utils.InitUtils;
 import com.reny.mvpvmlib.utils.LogUtils;
 import com.reny.mvpvmlib.widget.EmptyStateView;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -15,6 +17,7 @@ public abstract class BasePresenter<VM extends BaseViewModel> implements Present
     protected VM viewModel;
     protected Context context;
     protected Activity activity;
+    private RxPermissions rxPermissions;
 
     public void setViewModel(VM viewModel) {
         this.viewModel = viewModel;
@@ -26,6 +29,13 @@ public abstract class BasePresenter<VM extends BaseViewModel> implements Present
 
     public void setActivity(Activity activity) {
         this.activity = activity;
+    }
+
+    public RxPermissions getRxPermissions(){
+        if(null == activity)return null;
+        if(null == rxPermissions)rxPermissions = new RxPermissions(activity);
+        rxPermissions.setLogging(InitUtils.isPrint);
+        return rxPermissions;
     }
 
     public abstract void onCreatePresenter();

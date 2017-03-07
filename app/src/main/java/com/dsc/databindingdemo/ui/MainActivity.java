@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.dsc.databindingdemo.R;
 import com.dsc.databindingdemo.api.APIConfig;
@@ -50,6 +51,13 @@ public class MainActivity extends MyBaseActivity<ActivityMainBinding, MainViewMo
         binding.vp.setOffscreenPageLimit(fragmentList.size());
         //we need the savedInstanceState to retrieve the position
         binding.tabLayout.initialize(binding.vp, getSupportFragmentManager(), fragmentList, savedInstanceState);
+
+        binding.toolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //list回到顶部
+            }
+        });
     }
 
     @Override

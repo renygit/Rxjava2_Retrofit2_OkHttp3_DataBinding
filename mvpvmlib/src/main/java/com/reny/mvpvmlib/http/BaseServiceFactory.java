@@ -79,11 +79,9 @@ public abstract class BaseServiceFactory<S> {
         clientBuilder.readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
         clientBuilder.retryOnConnectionFailure(true);
 
-        if(null == InitUtils.cookieJar)
-            InitUtils.cookieJar = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(InitUtils.mContext));
         clientBuilder.cookieJar(InitUtils.cookieJar);
 
-        File cacheFile = new File(InitUtils.mContext.getCacheDir(), "HttpCache"); // 指定缓存路径
+        File cacheFile = new File(InitUtils.cacheDir, "HttpCache"); // 指定缓存路径
         Cache cache = new Cache(cacheFile, 1024 * 1024 * 100); // 指定缓存大小100Mb
         clientBuilder.cache(cache);
 

@@ -55,12 +55,17 @@ public abstract class BaseActivity<DB extends ViewDataBinding, VM extends BaseVi
             presenter.setViewModel(viewModel);
         }
 
+        if (null != presenter) {
+            //确保init前 presenter 拿到了context activity
+            presenter.setContext(this);
+            presenter.setActivity(this);
+        }
+
         preInit(savedInstanceState);
         this.init(savedInstanceState);
 
         if (null != presenter) {
-            presenter.setContext(this);
-            presenter.setActivity(this);
+            //确保init调用后再执行  一般是网络等耗时操作
             presenter.onCreate();
         }
 

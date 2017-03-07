@@ -3,4 +3,6 @@
 
     <string name="refresh_error">刷新失败，请稍后重试</string>
     <string name="have_no_storage">没有可用的存储设备</string>
+
+    <string name="no_permission_WRITE_EXTERNAL">缺少存储权限</string>
 </resources>

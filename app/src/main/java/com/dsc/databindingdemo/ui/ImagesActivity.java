@@ -1,5 +1,6 @@
 package com.dsc.databindingdemo.ui;
 
+import android.Manifest;
 import android.content.Context;
 import android.graphics.drawable.Animatable;
 import android.net.Uri;
@@ -9,7 +10,6 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.bingoogolapple.androidcommon.adapter.BGAOnRVItemClickListener;
+import io.reactivex.observers.DisposableObserver;
 import me.relex.photodraweeview.OnViewTapListener;
 import me.relex.photodraweeview.PhotoDraweeView;
 
@@ -84,7 +85,7 @@ public class ImagesActivity extends MyBaseActivity<ActivityImagesBinding, BaseVi
 
     @Override
     protected Class<EmptyPresenter> getPresenterClass() {
-        return null;
+        return EmptyPresenter.class;
     }
 
     @Override
@@ -192,13 +193,32 @@ public class ImagesActivity extends MyBaseActivity<ActivityImagesBinding, BaseVi
                 public void onRVItemClick(ViewGroup parent, View itemView, int position) {
                     if (sheetDialog.isShowing()) sheetDialog.dismiss();
                     if (position == 0) {
-                        String dir = FileUtils.getDownLoadImgPath();
-                        if (dir != null) {
-                            String imgName = "img_" + DateTimeUtils.getCurDateStr(DateTimeUtils.getFormatYMDHMStimeStamp());
-                            FrescoUtils.savePicture(imgsUrl.get(imgPos), dir, imgName);
-                        } else {
-                            ToastUtil.showShort(getResources().getString(R.string.have_no_storage));
-                        }
+                        //简单处理权限问题
+                        presenter.addDisposable(
+                            presenter.getRxPermissions()
+                                    .request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                                    .subscribeWith(new DisposableObserver<Boolean>() {
+                                        @Override
+                                        public void onNext(Boolean granted) {
+                                            if(granted){
+                                                String dir = FileUtils.getDownLoadImgPath();
+                                                if (dir != null) {
+                                                    String imgName = "img_" + DateTimeUtils.getCurDateStr(DateTimeUtils.getFormatYMDHMStimeStamp());
+                                                    FrescoUtils.savePicture(imgsUrl.get(imgPos), dir, imgName);
+                                                } else {
+                                                    ToastUtil.showShort(getResources().getString(R.string.have_no_storage));
+                                                }
+                                            }else {
+                                                ToastUtil.showLong(getResources().getString(R.string.no_permission_WRITE_EXTERNAL));
+                                            }
+                                        }
+                                        @Override
+                                        public void onError(Throwable e) {
+                                        }
+                                        @Override
+                                        public void onComplete() {}
+                                    })
+                        );
                     }
                 }
             });

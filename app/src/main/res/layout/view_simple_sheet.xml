@@ -26,6 +26,5 @@
         android:paddingRight="5dp"
         android:paddingTop="15dp"
         android:textColor="@color/text_color"
-        android:textSize="15sp"
-        android:textStyle="italic" />
+        android:textSize="15sp" />
 </LinearLayout>
