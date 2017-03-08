@@ -1,9 +1,7 @@
 package com.dsc.databindingdemo.core;
 
 import com.dsc.databindingdemo.api.APIConfig;
-import com.dsc.databindingdemo.model.BaseModel;
 import com.reny.mvpvmlib.http.BaseServiceFactory;
-import com.reny.mvpvmlib.http.HttpBaseModel;
 import com.reny.mvpvmlib.utils.LogUtils;
 
 import java.io.IOException;
@@ -49,11 +47,5 @@ public class ServiceFactory<S> extends BaseServiceFactory<S> {
         return chain.proceed(authorised);*/
         LogUtils.e(chain.request().url().url().toString());//打印要访问的地址 可注释
         return null;
-    }
-
-    @Override
-    public Class<? extends HttpBaseModel> getBaseModelClass() {
-        //统一错误处理的Model
-        return BaseModel.class;
     }
 }

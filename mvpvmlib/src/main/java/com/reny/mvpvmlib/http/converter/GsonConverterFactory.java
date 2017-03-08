@@ -18,7 +18,6 @@ package com.reny.mvpvmlib.http.converter;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
-import com.reny.mvpvmlib.http.HttpBaseModel;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
@@ -35,25 +34,22 @@ public final class GsonConverterFactory extends Converter.Factory {
      * Create an instance using {@code gson} for conversion. Encoding to JSON and
      * decoding from JSON (when no charset is specified by a header) will use UTF-8.
      */
-    public static GsonConverterFactory create(Gson gson, Class<? extends HttpBaseModel> modelClass) {
-        return new GsonConverterFactory(gson, modelClass);
+    public static GsonConverterFactory create(Gson gson) {
+        return new GsonConverterFactory(gson);
     }
 
     private final Gson gson;
-    private final Class<? extends HttpBaseModel> modelClass;
 
-    private GsonConverterFactory(Gson gson, Class<? extends HttpBaseModel> modelClass) {
+    private GsonConverterFactory(Gson gson) {
         if (gson == null) throw new NullPointerException("gson == null");
-        if (modelClass == null) throw new NullPointerException("modelClass == null");
         this.gson = gson;
-        this.modelClass = modelClass;
     }
 
     @Override
     public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations,
                                                             Retrofit retrofit) {
         TypeAdapter<?> adapter = gson.getAdapter(TypeToken.get(type));
-        return new GsonResponseBodyConverter<>(gson, adapter, modelClass);
+        return new GsonResponseBodyConverter<>(gson, adapter);
     }
 
     @Override

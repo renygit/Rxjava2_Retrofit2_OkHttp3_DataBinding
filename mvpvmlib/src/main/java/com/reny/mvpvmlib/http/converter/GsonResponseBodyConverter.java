@@ -17,7 +17,6 @@ package com.reny.mvpvmlib.http.converter;
 
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
-import com.reny.mvpvmlib.http.HttpBaseModel;
 import com.reny.mvpvmlib.utils.LogUtils;
 
 import java.io.IOException;
@@ -29,27 +28,38 @@ import retrofit2.Converter;
 final class GsonResponseBodyConverter<T> implements Converter<ResponseBody, T> {
     private final Gson gson;
     private final TypeAdapter<T> adapter;
-    private final Class<? extends HttpBaseModel> modelClass;
 
-    GsonResponseBodyConverter(Gson gson, TypeAdapter<T> adapter, Class<? extends HttpBaseModel> modelClass) {
+    GsonResponseBodyConverter(Gson gson, TypeAdapter<T> adapter) {
         this.gson = gson;
         this.adapter = adapter;
-        this.modelClass = modelClass;
     }
 
     @Override
     public T convert(ResponseBody value) throws IOException {
         String body = value.string();
         LogUtils.d(body);
-        HttpBaseModel model = gson.fromJson(body, modelClass);
         try {
-            if (!model.isError()) {
-                return adapter.fromJson(body);
-            } else {
-                throw new ResultErrorException(-1, "未知异常");
-            }
+            return adapter.fromJson(body);
         } finally {
             value.close();
         }
+        /*if(isHandlerError) {
+            HttpBaseModel model = gson.fromJson(body, BaseModel.class);
+            try {
+                if (!model.isError()) {
+                    return adapter.fromJson(body);
+                } else {
+                    throw new ResultErrorException(-1, "未知异常");
+                }
+            } finally {
+                value.close();
+            }
+        }else {
+            try {
+                return adapter.fromJson(body);
+            } finally {
+                value.close();
+            }
+        }*/
     }
 }

@@ -14,6 +14,7 @@ public class ImgsInfo implements Serializable{
 
     private List<String> imgsList;
     private int curPos;
+    private boolean isListeningChanged = false;//是否监听数据变化，默认不监听
 
     public List<String> getImgsList() {
         return imgsList;
@@ -29,5 +30,13 @@ public class ImgsInfo implements Serializable{
 
     public void setCurPos(int curPos) {
         this.curPos = curPos;
+    }
+
+    public boolean isListeningChanged() {
+        return isListeningChanged;
+    }
+
+    public void setListeningChanged(boolean listeningChanged) {
+        isListeningChanged = listeningChanged;
     }
 }

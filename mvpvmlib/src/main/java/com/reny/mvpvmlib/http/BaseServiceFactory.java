@@ -1,11 +1,7 @@
 package com.reny.mvpvmlib.http;
 
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.franmontiel.persistentcookiejar.PersistentCookieJar;
-import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
-import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.reny.mvpvmlib.http.converter.GsonConverterFactory;
 import com.reny.mvpvmlib.utils.InitUtils;
 import com.reny.mvpvmlib.utils.LogUtils;
@@ -63,7 +59,7 @@ public abstract class BaseServiceFactory<S> {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .client(getOkHttpClient())
-                .addConverterFactory(GsonConverterFactory.create(InitUtils.gson, getBaseModelClass()))
+                .addConverterFactory(GsonConverterFactory.create(InitUtils.gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
         return retrofit.create(serviceClass);
@@ -105,8 +101,5 @@ public abstract class BaseServiceFactory<S> {
     public abstract Long getDefaultTimeOut();
     @Nullable
     public abstract Response getResponse(Interceptor.Chain chain) throws IOException;
-
-    @NonNull
-    public abstract Class<? extends HttpBaseModel> getBaseModelClass();
 
 }

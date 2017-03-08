@@ -13,15 +13,19 @@ import com.dsc.databindingdemo.R;
 import com.dsc.databindingdemo.api.APIConfig;
 import com.dsc.databindingdemo.core.MyBaseActivity;
 import com.dsc.databindingdemo.databinding.ActivityMainBinding;
+import com.dsc.databindingdemo.model.event.RvScrollEvent;
 import com.dsc.databindingdemo.presenter.MainPresenter;
 import com.dsc.databindingdemo.presenter.vm.MainViewModel;
-import com.reny.mvpvmlib.BaseActivity;
+import com.michaelflisar.rxbus2.RxBus;
 import com.reny.mvpvmlib.utils.SwipeBackUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends MyBaseActivity<ActivityMainBinding, MainViewModel, MainPresenter> {
+
+    public static final String FAScrollType = FragmentA.class.getSimpleName();
+    public static final String FBScrollType = FragmentB.class.getSimpleName();
 
     @Override
     protected void init(Bundle savedInstanceState) {
@@ -56,6 +60,14 @@ public class MainActivity extends MyBaseActivity<ActivityMainBinding, MainViewMo
             @Override
             public void onClick(View v) {
                 //list回到顶部
+                switch (binding.vp.getCurrentItem()){
+                    case 0://点击toolbar时当前页面在第1页时
+                        RxBus.get().send(new RvScrollEvent(FAScrollType, 0));
+                        break;
+                    case 1://点击toolbar时当前页面在第2页时
+                        RxBus.get().send(new RvScrollEvent(FBScrollType, 0));
+                        break;
+                }
             }
         });
     }

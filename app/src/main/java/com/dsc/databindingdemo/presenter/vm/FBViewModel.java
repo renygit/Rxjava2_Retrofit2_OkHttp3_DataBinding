@@ -1,7 +1,6 @@
 package com.dsc.databindingdemo.presenter.vm;
 
 import com.dsc.databindingdemo.R;
-import com.dsc.databindingdemo.databinding.ItemFragmentABinding;
 import com.dsc.databindingdemo.model.GankData;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.reny.mvpvmlib.BaseViewModel;
@@ -15,9 +14,9 @@ import cn.bingoogolapple.androidcommon.adapter.BGABindingRecyclerViewAdapter;
  * Created by reny on 2017/1/4.
  */
 
-public class FAViewModel extends BaseViewModel {
+public class FBViewModel extends BaseViewModel {
 
-    public BGABindingRecyclerViewAdapter<GankData.ResultsBean, ItemFragmentABinding> innerAdapter = new BGABindingRecyclerViewAdapter<>(R.layout.item_fragment_a);
+    /*public BGABindingRecyclerViewAdapter<GankData.ResultsBean, ItemMainBinding> innerAdapter = new BGABindingRecyclerViewAdapter<>(R.layout.item_fragment_a);
     public LRecyclerViewAdapter adapter = new LRecyclerViewAdapter(innerAdapter);
     private List<GankData.ResultsBean> datas;
     public List<String> imgsList;
@@ -40,6 +39,6 @@ public class FAViewModel extends BaseViewModel {
         for (GankData.ResultsBean bean:datas) {
             imgsList.add(bean.getUrl());
         }
-    }
+    }*/
 
 }

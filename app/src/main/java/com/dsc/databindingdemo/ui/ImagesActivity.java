@@ -18,6 +18,7 @@ import com.dsc.databindingdemo.adapter.SimpleSheetAdapter;
 import com.dsc.databindingdemo.core.MyBaseActivity;
 import com.dsc.databindingdemo.databinding.ActivityImagesBinding;
 import com.dsc.databindingdemo.model.custom.ImgsInfo;
+import com.dsc.databindingdemo.model.event.RvScrollEvent;
 import com.dsc.databindingdemo.utils.DateTimeUtils;
 import com.dsc.databindingdemo.utils.FileUtils;
 import com.dsc.databindingdemo.utils.FrescoUtils;
@@ -29,6 +30,8 @@ import com.facebook.drawee.backends.pipeline.PipelineDraweeControllerBuilder;
 import com.facebook.drawee.controller.BaseControllerListener;
 import com.facebook.drawee.drawable.ScalingUtils;
 import com.facebook.imagepipeline.image.ImageInfo;
+import com.michaelflisar.rxbus2.RxBus;
+import com.michaelflisar.rxbus2.RxBusBuilder;
 import com.reny.mvpvmlib.BaseViewModel;
 import com.reny.mvpvmlib.EmptyPresenter;
 import com.reny.mvpvmlib.utils.SwipeBackUtils;
@@ -37,11 +40,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.bingoogolapple.androidcommon.adapter.BGAOnRVItemClickListener;
+import io.reactivex.functions.Consumer;
 import io.reactivex.observers.DisposableObserver;
 import me.relex.photodraweeview.OnViewTapListener;
 import me.relex.photodraweeview.PhotoDraweeView;
 
 public class ImagesActivity extends MyBaseActivity<ActivityImagesBinding, BaseViewModel, EmptyPresenter> {
+
+    private String TAG = getClass().getSimpleName();
+    private DraweePagerAdapter draweePagerAdapter;
+    private boolean isListeningChanged = false;//是否监听数据变化，默认不监听
+    public List<String> imgsList;
 
     @Override
     protected void init(Bundle savedInstanceState) {
@@ -55,26 +64,50 @@ public class ImagesActivity extends MyBaseActivity<ActivityImagesBinding, BaseVi
 
         if(null != getIntent()){
             ImgsInfo imgsInfo = (ImgsInfo) getIntent().getSerializableExtra(ImgsInfo.KEY);
+            if(null == imgsInfo)return;
+
+            isListeningChanged = imgsInfo.isListeningChanged();
             binding.vpImg.setPageMargin((int) (getResources().getDisplayMetrics().density * 15));
-            binding.vpImg.setAdapter(new DraweePagerAdapter(imgsInfo.getImgsList()));
+
+            draweePagerAdapter = new DraweePagerAdapter();
+            imgsList = imgsInfo.getImgsList();
+            draweePagerAdapter.setImgsUrl(imgsList);
+
+            binding.vpImg.setAdapter(draweePagerAdapter);
             binding.vpImg.setCurrentItem(imgsInfo.getCurPos());
-            binding.vpImg.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-                @Override
-                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            if(isListeningChanged) {//如果需要监听变化，就将浏览的位置传递出去,例如可以加载新图片数据并传递进来更新
+                if(imgsInfo.getCurPos() > imgsInfo.getImgsList().size() - 4) {
+                    RxBus.get().send(new RvScrollEvent(TAG, imgsInfo.getCurPos()));
                 }
-
-                @Override
-                public void onPageSelected(int position) {
-                    //TODO
-                    if(position > binding.vpImg.getAdapter().getCount()-4){
-
+                binding.vpImg.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                    @Override
+                    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                     }
-                }
 
-                @Override
-                public void onPageScrollStateChanged(int state) {
-                }
-            });
+                    @Override
+                    public void onPageSelected(int position) {
+                        RxBus.get().send(new RvScrollEvent(TAG, position));
+                    }
+
+                    @Override
+                    public void onPageScrollStateChanged(int state) {
+                    }
+                });
+            }
+        }
+
+        if(isListeningChanged) {
+            //监听数据是否更新
+            presenter.addDisposable(RxBusBuilder.create(ImgsInfo.class)
+                    .subscribe(new Consumer<ImgsInfo>() {
+                        @Override
+                        public void accept(ImgsInfo imgsInfo) {
+                            if(null == draweePagerAdapter)return;
+                            imgsList = imgsInfo.getImgsList();
+                            draweePagerAdapter.setImgsUrl(imgsList);
+                            draweePagerAdapter.notifyDataSetChanged();
+                        }
+                    }));
         }
     }
 
@@ -102,7 +135,7 @@ public class ImagesActivity extends MyBaseActivity<ActivityImagesBinding, BaseVi
         private BottomSheetDialog sheetDialog;
         private List<String> sheetNames;
 
-        private DraweePagerAdapter(List<String> imgsUrl){
+        private void setImgsUrl(List<String> imgsUrl){
             this.imgsUrl = imgsUrl;
         }
 

@@ -1,28 +1,13 @@
 package com.dsc.databindingdemo.presenter;
 
-import android.content.Intent;
-import android.os.Build;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.view.View;
-
 import com.dsc.databindingdemo.R;
 import com.dsc.databindingdemo.core.ServiceHelper;
-import com.dsc.databindingdemo.model.GankData;
-import com.dsc.databindingdemo.model.custom.ImgsInfo;
-import com.dsc.databindingdemo.model.event.RvScrollEvent;
-import com.dsc.databindingdemo.presenter.vm.FAViewModel;
-import com.dsc.databindingdemo.ui.ImagesActivity;
-import com.dsc.databindingdemo.ui.MainActivity;
-import com.dsc.databindingdemo.utils.ToastUtil;
-import com.michaelflisar.rxbus2.RxBus;
-import com.michaelflisar.rxbus2.RxBusBuilder;
+import com.dsc.databindingdemo.model.HotMovieData;
+import com.dsc.databindingdemo.presenter.vm.FBViewModel;
 import com.reny.mvpvmlib.BasePresenter;
-import com.reny.mvpvmlib.http.converter.ResultErrorException;
+import com.reny.mvpvmlib.utils.LogUtils;
 
-import cn.bingoogolapple.androidcommon.adapter.BGABindingViewHolder;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
@@ -30,17 +15,14 @@ import io.reactivex.schedulers.Schedulers;
  * Created by reny on 2017/1/4.
  */
 
-public class FAPresenter extends BasePresenter<FAViewModel> {
+public class FBPresenter extends BasePresenter<FBViewModel> {
 
-    private String category = "福利";
     private int count;
     int page = 1;
-    private ImgsInfo imgsInfo;
 
     @Override
     public void onCreatePresenter() {
-        viewModel.innerAdapter.setItemEventHandler(this);
-        viewModel.layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        //viewModel.innerAdapter.setItemEventHandler(this);
         count = context.getResources().getInteger(R.integer.load_count);//每页加载条数
         loadData(true);
 
@@ -55,13 +37,13 @@ public class FAPresenter extends BasePresenter<FAViewModel> {
          * 此处不需要使用 RxDisposableManager 管理   自带的addDisposable已经管理
          * 这里监听了大图查看时滚动的位置，同时更新首页列表滚动的位置，剩余条数<=2条时 加载下一页
          */
-        addDisposable(RxBusBuilder.create(RvScrollEvent.class)
+        /*addDisposable(RxBusBuilder.create(RvScrollEvent.class)
                 .subscribe(new Consumer<RvScrollEvent>() {
                     @Override
                     public void accept(RvScrollEvent event) {
                         //type过滤 只接受MainActivity、ImagesActivity发过来的消息
                         //ToastUtil.showShort(event.getType());
-                        if(event.getType().equals(MainActivity.FAScrollType) || event.getType().equals(ImagesActivity.class.getSimpleName())) {
+                        if(event.getType().equals(MainActivity.FBScrollType) || event.getType().equals(ImagesActivity.class.getSimpleName())) {
                             ((StaggeredGridLayoutManager) (viewModel.layoutManager)).scrollToPositionWithOffset(event.getPos(), 0);
                             viewModel.adapter.notifyDataSetChanged();//不调用会数据错乱
 
@@ -70,21 +52,21 @@ public class FAPresenter extends BasePresenter<FAViewModel> {
                             }
                         }
                     }
-                }));
+                }));*/
     }
 
     @Override
     public void loadData(final boolean isRefresh) {
         if(isRefresh) page = 1;
 
-        addDisposable(ServiceHelper.getGankAS().getGankIoData(category, count, page)
+        addDisposable(ServiceHelper.getDoubanAS().getHotMovie()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableObserver<GankData>() {
+                .subscribeWith(new DisposableObserver<HotMovieData>() {
                     @Override
-                    public void onNext(GankData value) {
-                        if(value.isError())throw new ResultErrorException(-1, "数据错误");
-                        page++;
+                    public void onNext(HotMovieData value) {
+                        LogUtils.json(value);
+                        /*page++;
                         viewModel.setData(isRefresh, value);
 
                         //如果是大图浏览时在加载数据 将数据用事件发送出去
@@ -92,15 +74,15 @@ public class FAPresenter extends BasePresenter<FAViewModel> {
                             if (null == imgsInfo) imgsInfo = new ImgsInfo();
                             imgsInfo.setImgsList(viewModel.imgsList);
                             RxBus.get().send(imgsInfo);
-                        }
+                        }*/
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        if (isRefresh && viewModel.firstLoadDataSuc){
+                        /*if (isRefresh && viewModel.firstLoadDataSuc){
                             ToastUtil.showShort(R.string.refresh_error);
                         }
-                        onFailure(e);
+                        onFailure(e);*/
                     }
 
                     @Override
@@ -110,7 +92,7 @@ public class FAPresenter extends BasePresenter<FAViewModel> {
     }
 
     //列表Item点击 与xml绑定
-    public void onClickItem(BGABindingViewHolder holder, GankData.ResultsBean model) {
+    /*public void onClickItem(BGABindingViewHolder holder, GankData.ResultsBean model) {
         viewModel.updateImgsList();//更新viewModel.imgsList
         if(null == imgsInfo)imgsInfo = new ImgsInfo();
         imgsInfo.setImgsList(viewModel.imgsList);
@@ -129,6 +111,6 @@ public class FAPresenter extends BasePresenter<FAViewModel> {
         }else {
             context.startActivity(intent);
         }
-    }
+    }*/
 
 }

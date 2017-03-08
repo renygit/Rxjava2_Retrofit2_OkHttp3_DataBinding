@@ -1,5 +1,6 @@
 package com.dsc.databindingdemo.core;
 
+import com.dsc.databindingdemo.api.DoubanApiService;
 import com.dsc.databindingdemo.api.GankApiService;
 
 /**
@@ -10,6 +11,11 @@ public class ServiceHelper {
 
     public static GankApiService getGankAS(){
         return (GankApiService) ServiceFactory.getInstance().getService(GankApiService.class);
+    }
+
+
+    public static DoubanApiService getDoubanAS(){
+        return (DoubanApiService) ServiceFactory.getInstance().getService(DoubanApiService.class);
     }
 
 }

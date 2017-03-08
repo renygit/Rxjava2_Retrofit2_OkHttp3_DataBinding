@@ -4,9 +4,10 @@ import java.util.List;
 
 /**
  * Created by reny on 2017/1/5.
+ * 所有实体
  */
 
-public class GankData {
+public class GankData  {
 
     /**
      * error : false
