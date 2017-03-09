@@ -6,11 +6,15 @@
 
     <color name="refresh_tip_color">#999999</color>
     <color name="img_error_color">#9b9b9b</color>
+    <color name="line">#e6e6e6</color>
 
     <color name="text_color">#222222</color>
     <color name="text_color_night">#FFFFFF</color>
     <color name="bg_color">#eeeeee</color>
-    <color name="bg_color_night">#2b2b2b</color>
+    <color name="bg_color_night">#504f4f</color>
+
+    <color name="text_gray_color">#9b9b9b</color>
+    <color name="text_red_color">#e62121</color>
 
     <color name="ripple_color">#20000000</color>   <!-- 波纹颜色 -->
 </resources>

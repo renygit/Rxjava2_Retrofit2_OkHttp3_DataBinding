@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">MVPVM</string>
 
+    <string-array name="tabTitles">
+        <item>图库</item>
+        <item>豆瓣热映</item>
+        <item>休息视频</item>
+        <item>设置</item>
+    </string-array>
+
     <string name="refresh_error">刷新失败，请稍后重试</string>
     <string name="have_no_storage">没有可用的存储设备</string>
 

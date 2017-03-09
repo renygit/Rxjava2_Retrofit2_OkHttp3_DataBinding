@@ -3,18 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <import type="android.view.View" />
-        <import type="com.dsc.databindingdemo.presenter.FBPresenter" />
-        <import type="com.dsc.databindingdemo.presenter.vm.FBViewModel" />
 
         <variable
             name="presenter"
-            type="FBPresenter" />
+            type="com.dsc.databindingdemo.presenter.FBPresenter" />
 
         <variable
             name="viewModel"
-            type="FBViewModel" />
+            type="com.dsc.databindingdemo.presenter.vm.FBViewModel" />
     </data>
 
     <LinearLayout
@@ -23,8 +20,7 @@
         android:paddingTop="@dimen/status_bar_height"
         android:orientation="vertical">
 
-        <!--<com.github.jdsjlzx.recyclerview.LRecyclerView
-            android:id="@+id/rv"
+        <com.github.jdsjlzx.recyclerview.LRecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="@{viewModel.showState ? View.GONE : View.VISIBLE}"
@@ -34,7 +30,8 @@
             app:isRefreshing="@{viewModel.isRefreshing}"
             app:noMore="@{viewModel.noMore}"
             app:isError="@{viewModel.isError}"
-            app:presenter="@{presenter}"/>
+            app:presenter="@{presenter}"
+            app:loadMoreEnabled="@{viewModel.loadMoreEnable}"/>
 
 
         <com.reny.mvpvmlib.widget.EmptyStateView
@@ -43,7 +40,7 @@
             app:indicatorColor="@color/colorAccent"
             app:indicatorName="BallPulseIndicator"
             app:state="@{viewModel.state}"
-            app:retry="@{presenter}"/>-->
+            app:retry="@{presenter}"/>
 
     </LinearLayout>
 </layout>

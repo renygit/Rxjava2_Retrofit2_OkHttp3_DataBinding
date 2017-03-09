@@ -7,6 +7,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
 import com.dsc.databindingdemo.R;
+import com.dsc.databindingdemo.api.GankApiService;
 import com.dsc.databindingdemo.core.ServiceHelper;
 import com.dsc.databindingdemo.model.GankData;
 import com.dsc.databindingdemo.model.custom.ImgsInfo;
@@ -32,7 +33,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class FAPresenter extends BasePresenter<FAViewModel> {
 
-    private String category = "福利";
+    private String category = GankApiService.category_a;
     private int count;
     int page = 1;
     private ImgsInfo imgsInfo;
@@ -40,7 +41,6 @@ public class FAPresenter extends BasePresenter<FAViewModel> {
     @Override
     public void onCreatePresenter() {
         viewModel.innerAdapter.setItemEventHandler(this);
-        viewModel.layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         count = context.getResources().getInteger(R.integer.load_count);//每页加载条数
         loadData(true);
 
@@ -62,7 +62,7 @@ public class FAPresenter extends BasePresenter<FAViewModel> {
                         //type过滤 只接受MainActivity、ImagesActivity发过来的消息
                         //ToastUtil.showShort(event.getType());
                         if(event.getType().equals(MainActivity.FAScrollType) || event.getType().equals(ImagesActivity.class.getSimpleName())) {
-                            ((StaggeredGridLayoutManager) (viewModel.layoutManager)).scrollToPositionWithOffset(event.getPos(), 0);
+                            ((StaggeredGridLayoutManager) (viewModel.getLayoutManager())).scrollToPositionWithOffset(event.getPos(), 0);
                             viewModel.adapter.notifyDataSetChanged();//不调用会数据错乱
 
                             if (null != viewModel.imgsList && event.getPos() > viewModel.imgsList.size() - 4) {

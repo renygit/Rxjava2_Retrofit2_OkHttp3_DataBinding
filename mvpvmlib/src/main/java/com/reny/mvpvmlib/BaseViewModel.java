@@ -29,7 +29,7 @@ public class BaseViewModel extends BaseObservable {
     //决定显示RecyclerView 还是EmptyStateView（用于显示第一次加载数据时的UI）
     public ObservableBoolean showState = new ObservableBoolean(true);
 
-    public RecyclerView.LayoutManager layoutManager = null;
+    private RecyclerView.LayoutManager layoutManager = null;
 
     public void refreshComplete() {
         isRefreshing.set(true);

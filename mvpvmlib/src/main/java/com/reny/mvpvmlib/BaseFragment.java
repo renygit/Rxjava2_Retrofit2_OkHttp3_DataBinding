@@ -80,6 +80,8 @@ public abstract class BaseFragment<DB extends ViewDataBinding, VM extends BaseVi
             presenter.setContext(getContext());
             presenter.setActivity(getActivity());
         }
+
+        init(savedInstanceState);
         //为什么不直接getUserVisibleHint();而是通过自己存isVisibleToUserState变量判断
         //因为v4的25的版本 已经调用 setUserVisibleHint(true)，结果到这里getUserVisibleHint是false
         // （ps:看了FragmentManager源码Fragment被重新创建有直接赋值isVisibleToUser不知道是不是那里和之前v4有改动的地方）
@@ -209,6 +211,8 @@ public abstract class BaseFragment<DB extends ViewDataBinding, VM extends BaseVi
     }
 
 
+    protected void onCreateViewLazy(Bundle savedInstanceState){}
+
     protected void onResumeLazy(){}
 
     protected void onStartLazy(){}
@@ -218,10 +222,9 @@ public abstract class BaseFragment<DB extends ViewDataBinding, VM extends BaseVi
     protected void onPauseLazy(){}
 
     protected void onDestroyViewLazy(){}
-    
-    
 
-    protected abstract void onCreateViewLazy(Bundle savedInstanceState);
+
+    protected abstract void init(Bundle savedInstanceState);
 
     protected abstract int getLayoutId();
 

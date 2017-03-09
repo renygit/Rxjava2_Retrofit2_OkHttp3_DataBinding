@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,6 +25,7 @@ import java.util.List;
 
 public class MainActivity extends MyBaseActivity<ActivityMainBinding, MainViewModel, MainPresenter> {
 
+    private String[] tabTitles;
     public static final String FAScrollType = FragmentA.class.getSimpleName();
     public static final String FBScrollType = FragmentB.class.getSimpleName();
 
@@ -31,7 +33,9 @@ public class MainActivity extends MyBaseActivity<ActivityMainBinding, MainViewMo
     protected void init(Bundle savedInstanceState) {
         SwipeBackUtils.DisableSwipeActivity(this);
 
-        binding.toolbar.setTitle(getString(R.string.app_name));
+        tabTitles = getResources().getStringArray(R.array.tabTitles);
+
+        binding.toolbar.setTitle(tabTitles[0]);
         setSupportActionBar(binding.toolbar);
         binding.toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -69,6 +73,17 @@ public class MainActivity extends MyBaseActivity<ActivityMainBinding, MainViewMo
                         break;
                 }
             }
+        });
+
+        binding.vp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
+            @Override
+            public void onPageSelected(int position) {
+                binding.toolbar.setTitle(tabTitles[position]);
+            }
+            @Override
+            public void onPageScrollStateChanged(int state) {}
         });
     }
 

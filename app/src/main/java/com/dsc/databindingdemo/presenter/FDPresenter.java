@@ -1,18 +1,13 @@
 package com.dsc.databindingdemo.presenter;
 
-import android.content.Intent;
-
-import com.dsc.databindingdemo.R;
-import com.dsc.databindingdemo.api.GankApiService;
 import com.dsc.databindingdemo.core.ServiceHelper;
 import com.dsc.databindingdemo.model.GankData;
 import com.dsc.databindingdemo.presenter.vm.FCViewModel;
-import com.dsc.databindingdemo.ui.WebActivity;
-import com.dsc.databindingdemo.utils.ToastUtil;
+import com.dsc.databindingdemo.presenter.vm.FDViewModel;
 import com.reny.mvpvmlib.BasePresenter;
-import com.reny.mvpvmlib.http.converter.ResultErrorException;
+import com.reny.mvpvmlib.utils.LogUtils;
+import com.zhy.changeskin.SkinManager;
 
-import cn.bingoogolapple.androidcommon.adapter.BGABindingViewHolder;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
@@ -21,16 +16,14 @@ import io.reactivex.schedulers.Schedulers;
  * Created by reny on 2017/1/4.
  */
 
-public class FCPresenter extends BasePresenter<FCViewModel> {
+public class FDPresenter extends BasePresenter<FDViewModel> {
 
-    private String category = GankApiService.category_b;
-    private int count;
-    int page = 1;
+    private String category = "福利";
+    private int count = 20;
+    private int page = 1;
 
     @Override
     public void onCreatePresenter() {
-        viewModel.innerAdapter.setItemEventHandler(this);
-        count = context.getResources().getInteger(R.integer.load_count);//每页加载条数
         loadData(true);
     }
 
@@ -38,22 +31,21 @@ public class FCPresenter extends BasePresenter<FCViewModel> {
     public void loadData(final boolean isRefresh) {
         if(isRefresh) page = 1;
 
+        //LogUtils.e("loadata......"+type.toString());
         addDisposable(ServiceHelper.getGankAS().getGankIoData(category, count, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<GankData>() {
                     @Override
                     public void onNext(GankData value) {
-                        if(value.isError())throw new ResultErrorException(-1, "数据错误");
+                        LogUtils.json(value);
                         page++;
-                        viewModel.setData(isRefresh, value);
+                        //viewModel.setData(isRefresh, value);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        if (isRefresh && viewModel.firstLoadDataSuc){
-                            ToastUtil.showShort(R.string.refresh_error);
-                        }
+                        //System.out.println(e.getMessage());
                         onFailure(e);
                     }
 
@@ -63,11 +55,10 @@ public class FCPresenter extends BasePresenter<FCViewModel> {
         );
     }
 
-    //列表Item点击 与xml绑定
-    public void onClickItem(BGABindingViewHolder holder, GankData.ResultsBean model) {
-        Intent intent = new Intent(context, WebActivity.class);
-        intent.putExtra("url", model.getUrl());
-        context.startActivity(intent);
+    public void switchBtnCheckChange(boolean isChecked){
+        viewModel.isDarkTheme = isChecked;
+
+        SkinManager.getInstance().changeSkin(isChecked ? "night":"");
     }
 
 }

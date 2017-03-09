@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.view.View" />
         <import type="com.dsc.databindingdemo.presenter.FCPresenter" />
         <import type="com.dsc.databindingdemo.presenter.vm.FCViewModel" />
 
@@ -20,12 +22,26 @@
         android:paddingTop="@dimen/status_bar_height"
         android:orientation="vertical">
 
-        <android.support.v7.widget.SwitchCompat
-            android:id="@+id/switchBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:checked="@{viewModel.isDarkTheme}"
-            android:theme="@style/ColorSwitchStyle" />
+        <com.github.jdsjlzx.recyclerview.LRecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{viewModel.showState ? View.GONE : View.VISIBLE}"
+            app:layoutManager="@{viewModel.layoutManager}"
+            app:OnFreshListener="@{presenter}"
+            app:adapter="@{viewModel.adapter}"
+            app:isRefreshing="@{viewModel.isRefreshing}"
+            app:noMore="@{viewModel.noMore}"
+            app:isError="@{viewModel.isError}"
+            app:presenter="@{presenter}"/>
+
+
+        <com.reny.mvpvmlib.widget.EmptyStateView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:indicatorColor="@color/colorAccent"
+            app:indicatorName="BallPulseIndicator"
+            app:state="@{viewModel.state}"
+            app:retry="@{presenter}"/>
+
     </LinearLayout>
 </layout>

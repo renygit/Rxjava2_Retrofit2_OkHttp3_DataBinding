@@ -15,6 +15,9 @@ public interface GankApiService {
     //BaseServiceFactory->createService() 获取属性为BASE_URL的值
     String BASE_URL = "https://gank.io/api/";
 
+    String category_a = "福利";
+    String category_b = "休息视频";
+
     /**
      * 分类数据: http://gank.io/api/data/数据类型/请求个数/第几页
      * 数据类型： 福利 | Android | iOS | 休息视频 | 拓展资源 | 前端 | all

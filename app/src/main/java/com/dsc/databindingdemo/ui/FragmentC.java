@@ -1,7 +1,7 @@
 package com.dsc.databindingdemo.ui;
 
 import android.os.Bundle;
-import android.widget.CompoundButton;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 
 import com.dsc.databindingdemo.R;
 import com.dsc.databindingdemo.databinding.FragmentCBinding;
@@ -15,17 +15,19 @@ import com.reny.mvpvmlib.BaseFragment;
 
 public class FragmentC extends BaseFragment<FragmentCBinding, FCViewModel, FCPresenter> {
 
+    /***
+     * 和Activity中的init()有所区别
+     * 这里只做Fragment尚未出现时的操作
+     * 可以延迟初始化的工作放在onCreateViewLazy方法中，实现懒加载
+     * binding必须写在Init中
+     * @param savedInstanceState
+     */
     @Override
-    protected void onCreateViewLazy(Bundle savedInstanceState) {
+    protected void init(Bundle savedInstanceState) {
         binding.setPresenter(presenter);
         binding.setViewModel(viewModel);
-
-        binding.switchBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                presenter.switchBtnCheckChange(isChecked);
-            }
-        });
+        //因为懒加载，无法在Presenter中初始化LayoutManager，所以binding后为RecyclerView设置LayoutManager
+        viewModel.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
     }
 
     @Override

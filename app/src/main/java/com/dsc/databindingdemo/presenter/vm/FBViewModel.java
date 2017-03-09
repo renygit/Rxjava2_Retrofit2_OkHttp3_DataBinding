@@ -1,7 +1,10 @@
 package com.dsc.databindingdemo.presenter.vm;
 
+import android.databinding.ObservableBoolean;
+
 import com.dsc.databindingdemo.R;
-import com.dsc.databindingdemo.model.GankData;
+import com.dsc.databindingdemo.databinding.ItemFragmentBBinding;
+import com.dsc.databindingdemo.model.HotMovieData;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.reny.mvpvmlib.BaseViewModel;
 
@@ -16,29 +19,18 @@ import cn.bingoogolapple.androidcommon.adapter.BGABindingRecyclerViewAdapter;
 
 public class FBViewModel extends BaseViewModel {
 
-    /*public BGABindingRecyclerViewAdapter<GankData.ResultsBean, ItemMainBinding> innerAdapter = new BGABindingRecyclerViewAdapter<>(R.layout.item_fragment_a);
+    public ObservableBoolean loadMoreEnable = new ObservableBoolean(false);
+    public BGABindingRecyclerViewAdapter<HotMovieData.SubjectsBean, ItemFragmentBBinding> innerAdapter = new BGABindingRecyclerViewAdapter<>(R.layout.item_fragment_b);
     public LRecyclerViewAdapter adapter = new LRecyclerViewAdapter(innerAdapter);
-    private List<GankData.ResultsBean> datas;
-    public List<String> imgsList;
+    private List<HotMovieData.SubjectsBean> datas;
 
-    public void setData(boolean isRefresh, GankData data) {
-        setDataState(data.getResults());
-        if(null == datas)datas = new ArrayList<>();
-        if(isRefresh)datas.clear();
-        datas.addAll(data.getResults());
-        if(isRefresh)innerAdapter.setData(datas);
+    public void setData(boolean isRefresh, HotMovieData data) {
+        setDataState(data.getSubjects());
+        if (null == datas) datas = new ArrayList<>();
+        if (isRefresh) datas.clear();
+        datas.addAll(data.getSubjects());
+        if (isRefresh) innerAdapter.setData(datas);
         adapter.notifyDataSetChanged();
-
-        updateImgsList();
     }
-
-    public void updateImgsList() {
-        //大图查看的数据重置
-        if(null == imgsList)imgsList = new ArrayList<>();
-        else imgsList.clear();
-        for (GankData.ResultsBean bean:datas) {
-            imgsList.add(bean.getUrl());
-        }
-    }*/
 
 }
