@@ -4,13 +4,10 @@ import android.os.Bundle;
 import android.widget.CompoundButton;
 
 import com.dsc.databindingdemo.R;
-import com.dsc.databindingdemo.databinding.FragmentBBinding;
 import com.dsc.databindingdemo.databinding.FragmentDBinding;
 import com.dsc.databindingdemo.presenter.FDPresenter;
 import com.dsc.databindingdemo.presenter.vm.FDViewModel;
 import com.reny.mvpvmlib.BaseFragment;
-import com.reny.mvpvmlib.BaseViewModel;
-import com.reny.mvpvmlib.EmptyPresenter;
 
 /**
  * Created by reny on 2017/1/9.
@@ -33,6 +30,7 @@ public class FragmentD extends BaseFragment<FragmentDBinding, FDViewModel, FDPre
 
     @Override
     protected void onCreateViewLazy(Bundle savedInstanceState) {
+        //未保存switch状态
         binding.switchBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

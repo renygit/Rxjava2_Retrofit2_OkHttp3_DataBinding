@@ -1,7 +1,6 @@
 package com.dsc.databindingdemo.ui;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -28,6 +27,7 @@ public class MainActivity extends MyBaseActivity<ActivityMainBinding, MainViewMo
     private String[] tabTitles;
     public static final String FAScrollType = FragmentA.class.getSimpleName();
     public static final String FBScrollType = FragmentB.class.getSimpleName();
+    public static final String FCScrollType = FragmentC.class.getSimpleName();
 
     @Override
     protected void init(Bundle savedInstanceState) {
@@ -42,8 +42,8 @@ public class MainActivity extends MyBaseActivity<ActivityMainBinding, MainViewMo
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.menu_about:
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setData(Uri.parse(APIConfig.ABOUT_URL));
+                        Intent intent = new Intent(MainActivity.this, WebActivity.class);
+                        intent.putExtra("url", APIConfig.ABOUT_URL);
                         startActivity(intent);
                         break;
                 }
@@ -60,6 +60,7 @@ public class MainActivity extends MyBaseActivity<ActivityMainBinding, MainViewMo
         //we need the savedInstanceState to retrieve the position
         binding.tabLayout.initialize(binding.vp, getSupportFragmentManager(), fragmentList, savedInstanceState);
 
+        //演示“发送事件” （功能可以用FragmentA的实例调用内部方法实现滑动到顶部，eg: fragmentA.scrollToTop(); 在FragmentA中实现滚动方法即可）
         binding.toolbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,6 +71,9 @@ public class MainActivity extends MyBaseActivity<ActivityMainBinding, MainViewMo
                         break;
                     case 1://点击toolbar时当前页面在第2页时
                         RxBus.get().send(new RvScrollEvent(FBScrollType, 0));
+                        break;
+                    case 2://点击toolbar时当前页面在第3页时
+                        RxBus.get().send(new RvScrollEvent(FCScrollType, 0));
                         break;
                 }
             }

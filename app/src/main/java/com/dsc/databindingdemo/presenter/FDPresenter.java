@@ -2,7 +2,6 @@ package com.dsc.databindingdemo.presenter;
 
 import com.dsc.databindingdemo.core.ServiceHelper;
 import com.dsc.databindingdemo.model.GankData;
-import com.dsc.databindingdemo.presenter.vm.FCViewModel;
 import com.dsc.databindingdemo.presenter.vm.FDViewModel;
 import com.reny.mvpvmlib.BasePresenter;
 import com.reny.mvpvmlib.utils.LogUtils;
