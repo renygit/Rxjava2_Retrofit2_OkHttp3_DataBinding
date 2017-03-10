@@ -115,7 +115,7 @@ public class FBPresenter extends BasePresenter<FBViewModel> {
         String genres = "类型：";
         for (int i = 0; i < model.getGenres().size(); i++) {
             genres += model.getGenres().get(i);
-            if(i != model.getCasts().size()-1)genres += "/";
+            if(i != model.getGenres().size()-1)genres += "/";
         }
         return genres;
     }

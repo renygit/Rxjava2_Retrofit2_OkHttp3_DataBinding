@@ -60,7 +60,11 @@ dependencies {
     //compile 'com.squareup.okhttp3:okhttp-ws:3.4.1'
     //压缩
     //compile 'top.zibin:Luban:1.0.8'
+
     //fresco
+    //webp图片支持请启用下面两行
+    //compile 'com.facebook.fresco:animated-webp:1.0.0'
+    //compile 'com.facebook.fresco:webpsupport:1.0.0'
     compile 'com.facebook.fresco:fresco:1.0.0'
     compile 'com.facebook.fresco:animated-gif:1.0.0'
     //下拉刷新库
