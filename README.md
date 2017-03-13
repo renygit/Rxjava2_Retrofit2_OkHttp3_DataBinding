@@ -1,11 +1,13 @@
 # Rxjava2_Retrofit2_OkHttp3_DataBinding
+	=================
 使用了Rxjava2_Retrofit2_OkHttp3_DataBinding等一系列库，自己构建的MVPVM架构，有一些细节没有修改，但整体雏形还是可以用于项目开发。<br>
 
 #引用
+	```java
 maven { url "https://jitpack.io" }
   
   dependencies {<br>
-	        compile 'com.github.ADL1121:Rxjava2_Retrofit2_OkHttp3_DataBinding:0.0.3'<br>
+	        compile 'com.github.ADL1121:Rxjava2_Retrofit2_OkHttp3_DataBinding:0.0.4'<br>
 	}<br>
   
   
