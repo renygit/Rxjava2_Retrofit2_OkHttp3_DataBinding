@@ -1,7 +1,7 @@
 # Rxjava2_Retrofit2_OkHttp3_DataBinding
 使用了Rxjava2_Retrofit2_OkHttp3_DataBinding等一系列库，自己构建的MVPVM架构，有一些细节没有修改，但整体雏形还是可以用于项目开发。<br>
 
-#引用
+引用
 ===========================
 maven { url "https://jitpack.io" }
   
@@ -10,7 +10,7 @@ maven { url "https://jitpack.io" }
 	}<br>
   
   
-#使用
+使用
 ==========================
 Application初始化时调用InitUtils.init(this, BuildConfig.DEBUG);<br>
   
@@ -21,7 +21,7 @@ Activity继承BaseActivity<ActivityMainBinding, MainViewModel, MainPresenter> �
 
 
 
-#Lib中引用到的库
+Lib中引用到的库
 ===================
 
 compile 'com.android.support:appcompat-v7:25.1.1'<br>
