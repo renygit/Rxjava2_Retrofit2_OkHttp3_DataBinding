@@ -6,7 +6,7 @@
 maven { url "https://jitpack.io" }
   
   dependencies {<br>
-	        compile 'com.github.ADL1121:Rxjava2_Retrofit2_OkHttp3_DataBinding:0.0.4'<br>
+	        compile 'com.github.renygit:Rxjava2_Retrofit2_OkHttp3_DataBinding:0.0.4'<br>
 	}<br>
   
   
@@ -18,6 +18,8 @@ Activity继承BaseActivity<ActivityMainBinding, MainViewModel, MainPresenter> �
 会自动实例化三个变量binding，viewModel，presenter；Fragment类似。<br>
   
 具体使用请看Demo，可以极大减少代码量，欢迎star，以后还会继续完善<br>
+
+近期会重写这个库，发布到另一个路径下，尽量不过度封装，也提供不使用BaseActivity的方法引用。另：用户名更改了一下<br>
 
 
 
