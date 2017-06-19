@@ -12,6 +12,8 @@ maven { url "https://jitpack.io" }
   
 使用
 ==========================
+此库已重写，传送地址：https://github.com/renygit/MVPLib <br>
+
 Application初始化时调用InitUtils.init(this, BuildConfig.DEBUG);<br>
   
 Activity继承BaseActivity<ActivityMainBinding, MainViewModel, MainPresenter> 指定3个泛型，分别是默认生成的Binding、继承自库的BaseViewModel,继承自库的BasePresenter;<br>
@@ -19,7 +21,7 @@ Activity继承BaseActivity<ActivityMainBinding, MainViewModel, MainPresenter> �
   
 具体使用请看Demo，可以极大减少代码量，欢迎star，以后还会继续完善<br>
 
-近期会重写这个库，发布到另一个路径下，尽量不过度封装，也提供不使用BaseActivity的方法引用。另：用户名更改了一下<br>
+近期会重写这个库，发布到另一个路径下，尽量不过度封装，也提供不使用BaseActivity的方法引用。另：用户名更改了一下。<br>
 
 
 
